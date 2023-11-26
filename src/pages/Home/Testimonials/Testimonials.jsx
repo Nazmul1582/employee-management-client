@@ -1,5 +1,6 @@
 import { Box, Container, Grid } from "@mui/material";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import Carousel from "./Carousel";
 
 const Testimonials = () => {
   return (
@@ -10,6 +11,7 @@ const Testimonials = () => {
             heading="Testimonials"
             subHeading="Discover the Success Stories of Companies Transformed by Talent Pulse"
           />
+          <Carousel />
         </Grid>
       </Container>
     </Box>
