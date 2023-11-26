@@ -1,5 +1,6 @@
 import { Box, Container, Grid } from "@mui/material";
 import ServiceCard from "../ServiceCard/ServiceCard";
+import SectionName from "../../../components/SectionName/SectionName";
 
 const Services = () => {
   const ourServices = [
@@ -50,6 +51,7 @@ const Services = () => {
   return (
     <Box component="section" sx={{ py: "5rem" }}>
       <Container maxWidth="xl">
+        <SectionName name="Services" />
         <Grid container justifyContent="center" alignItems="center" spacing={4}>
           {ourServices.map((service) => (
             <Grid item xs={12} md={6} lg={4} key={service.id}>
