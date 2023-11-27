@@ -11,27 +11,17 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
-const pages = ["Home", "Dashboard", "Contact"];
-const settings = ["Profile", "Dashboard", "Logout"];
+import { Link } from "@mui/material";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -42,7 +32,7 @@ const Navbar = () => {
             variant="h5"
             noWrap
             component="a"
-            href="#home"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -84,18 +74,28 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              <Link underline="none" href="/">
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Home</Typography>
                 </MenuItem>
-              ))}
+              </Link>
+              <Link underline="none" href="/dashboard">
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Dashboard</Typography>
+                </MenuItem>
+              </Link>
+              <Link underline="none" href="/contact">
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Contact</Typography>
+                </MenuItem>
+              </Link>
             </Menu>
           </Box>
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href="#home"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -108,25 +108,40 @@ const Navbar = () => {
           >
             TalentPulse
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex", justifyContent: "center" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex", justifyContent: "center" },
+            }}
+          >
+            <Link href="/">
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
+                Home
               </Button>
-            ))}
+            </Link>
+            <Link href="/dashboard">
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
+                Dashboard
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
+                Contact
+              </Button>
+            </Link>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="https://i.ibb.co/n11GR29/muslim-avater.jpg" />
+              <IconButton sx={{ p: 0 }}>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://i.ibb.co/n11GR29/muslim-avater.jpg"
+                />
               </IconButton>
             </Tooltip>
-            <Menu
+            <Button variant="contained" sx={{ml: "10px", backgroundColor: "white", color: "black"}}>Logout</Button>
+            {/* <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -144,10 +159,10 @@ const Navbar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography component="a" href={`/${setting}`} textAlign="center" textTransform="capitalize" sx={{textDecoration: "none", color: "black"}}>{setting}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
+            </Menu> */}
           </Box>
         </Toolbar>
       </Container>
