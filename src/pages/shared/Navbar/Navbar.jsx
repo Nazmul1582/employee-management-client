@@ -141,28 +141,7 @@ const Navbar = () => {
               </IconButton>
             </Tooltip>
             <Button variant="contained" sx={{ml: "10px", backgroundColor: "white", color: "black"}}>Logout</Button>
-            {/* <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography component="a" href={`/${setting}`} textAlign="center" textTransform="capitalize" sx={{textDecoration: "none", color: "black"}}>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu> */}
+            {/* <Button href="/login" variant="contained" sx={{ml: "10px", backgroundColor: "white", color: "black"}}>Login</Button> */}
           </Box>
         </Toolbar>
       </Container>

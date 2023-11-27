@@ -59,7 +59,7 @@ export default function Login() {
               Login
             </Button>
             <Grid textAlign="center">
-                <Link href="#" variant="body2">
+                <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
             </Grid>
