@@ -20,11 +20,12 @@ export default function SignUp() {
   } = useForm();
 
   const onSubmit = (data) => {
-    const { name, email, password, photoUrl } = data;
+    console.log(data);
+    const { name, email, password } = data;
 
     createUser(email, password)
       .then(() => {
-        updateUserProfile(name, photoUrl)
+        updateUserProfile(name)
           .then(() => {
             Swal.fire({
               title: "User created successfully!",
