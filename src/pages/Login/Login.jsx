@@ -6,15 +6,39 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
     formState: { errors },
+    reset,
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    const { email, password } = data;
+    login(email, password)
+      .then(() => {
+          reset();
+          Swal.fire({
+            title: "User successfully logged-in!",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
   };
 
   return (
