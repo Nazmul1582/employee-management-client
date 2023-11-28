@@ -11,7 +11,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 export default function SignUp() {
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
   const {
     register,
     handleSubmit,
@@ -20,18 +20,26 @@ export default function SignUp() {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    const { email, password } = data;
+    const { name, email, password, photoUrl } = data;
 
     createUser(email, password)
-      .then((res) => {
-        console.log(res.user);
-        Swal.fire({
-          title: "User created successfully!",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+      .then(() => {
+        updateUserProfile(name, photoUrl)
+          .then(() => {
+            Swal.fire({
+              title: "User created successfully!",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: error.message,
+            });
+          });
       })
       .catch((error) => {
         Swal.fire({

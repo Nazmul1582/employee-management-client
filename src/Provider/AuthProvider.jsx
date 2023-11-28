@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={authInfo}>
       {loading ? (
-        <Grid justifyContent="center" alignItems="center" minHeight="100vh">
+        <Grid sx={{display: "grid", placeItems: "center"}}>
           <CircularProgress />
         </Grid>
       ) : (
