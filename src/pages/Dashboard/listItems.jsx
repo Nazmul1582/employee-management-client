@@ -13,55 +13,43 @@ import { Link } from "@mui/material";
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItemButton>
+    <ListItemButton href="/dashboard/employee-list">
       <ListItemIcon>
         <FormatListBulletedIcon />
       </ListItemIcon>
-      <Link href="/employee-list" underline="none" color="black">
         <ListItemText primary="Employee List" />
-      </Link>
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton href="/dashboard/details">
       <ListItemIcon>
         <DetailsIcon />
       </ListItemIcon>
-      <Link href="/details" underline="none" color="black">
         <ListItemText primary="Details" />
-      </Link>
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton href="/dashboard/progress">
       <ListItemIcon>
         <DonutLargeIcon />
       </ListItemIcon>
-      <Link href="/progress" underline="none" color="black">
         <ListItemText primary="Progress" />
-      </Link>
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton href="/dashboard/work-sheet">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <Link href="/work-sheet" underline="none" color="black">
         <ListItemText primary="Work Sheet" />
-      </Link>
     </ListItemButton>
 
-    <ListItemButton>
+    <ListItemButton href="/dashboard/payment-history">
       <ListItemIcon>
         <PaymentIcon />
       </ListItemIcon>
-      <Link href="/payment-history" underline="none" color="black">
         <ListItemText primary="Payment History" />
-      </Link>
     </ListItemButton>
 
-    <ListItemButton>
+    <ListItemButton href="/dashboard/all-employee-list">
       <ListItemIcon>
         <FormatListBulletedIcon />
       </ListItemIcon>
-      <Link href="/all-employee-list" underline="none" color="black">
         <ListItemText primary="All Employee List" />
-      </Link>
     </ListItemButton>
   </React.Fragment>
 );
