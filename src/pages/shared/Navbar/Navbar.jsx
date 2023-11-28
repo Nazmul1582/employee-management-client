@@ -16,7 +16,7 @@ import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -138,13 +138,11 @@ const Navbar = () => {
               <>
                 <Tooltip title="Open settings">
                   <IconButton sx={{ p: 0 }}>
-                    <Avatar
-                      alt="user profile photo"
-                      src={user.photoURL}
-                    />
+                    <Avatar alt="user profile photo" src={user.photoURL} />
                   </IconButton>
                 </Tooltip>
                 <Button
+                  onClick={logout}
                   variant="contained"
                   sx={{ ml: "10px", backgroundColor: "white", color: "black" }}
                 >
