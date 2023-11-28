@@ -7,8 +7,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 export default function SignUp() {
+  const { createUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -18,6 +21,25 @@ export default function SignUp() {
 
   const onSubmit = (data) => {
     console.log(data);
+    const { email, password } = data;
+
+    createUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        Swal.fire({
+          title: "User created successfully!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
   };
 
   return (
