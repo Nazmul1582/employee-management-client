@@ -9,6 +9,10 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import axiosPublic from "../../utils/AxiosPublic";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 export default function SignUp() {
   const { createUser, updateUserProfile } = useAuth();
@@ -19,36 +23,59 @@ export default function SignUp() {
     control,
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     console.log(data);
-    const { name, email, password } = data;
-
-    createUser(email, password)
-      .then(() => {
-        updateUserProfile(name)
-          .then(() => {
-            Swal.fire({
-              title: "User created successfully!",
-              icon: "success",
-              showConfirmButton: false,
-              timer: 1500,
+    const { name, email, password, userRole, bank_account_no, salary, designation, image } = data;
+    const imageFile = {image: image[0]}
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    console.log(res);
+    if(res.data.success){
+      const user = {
+        name, email, password, userRole, bank_account_no, salary: parseInt(salary), designation, image: res.data.data.display_url
+      }
+      console.log(user);
+      createUser(email, password)
+        .then(() => {
+          updateUserProfile(name, user.image)
+            .then(async() => {
+              await axiosPublic.post("/users", user)
+                .then((res) => {
+                  console.log(res);
+                  Swal.fire({
+                    title: "User created successfully!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                }).catch((error) => {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.message,
+                  });
+                });
+            })
+            .catch((error) => {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: error.message,
+              });
             });
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: error.message,
-            });
+        })
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error.message,
           });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: error.message,
         });
-      });
+    }
+
   };
 
   return (
@@ -116,13 +143,13 @@ export default function SignUp() {
             </Typography>
           )}
           <Controller
-            name="Role"
+            name="userRole"
             control={control}
             defaultValue=""
             render={({ field }) => (
               <FormControl fullWidth>
-                <InputLabel>Role</InputLabel>
-                <Select label="Role" {...field}>
+                <InputLabel>User Role</InputLabel>
+                <Select label="User Role" {...field}>
                   <MenuItem value="employee">Employee</MenuItem>
                   <MenuItem value="hr">HR</MenuItem>
                   <MenuItem value="admin">Admin</MenuItem>
@@ -163,11 +190,11 @@ export default function SignUp() {
           <TextField
             margin="normal"
             fullWidth
-            {...register("photo", { required: true })}
+            {...register("image", { required: true })}
             type="file"
           />
-          {errors.photo && (
-            <Typography color="red">Photo is required!</Typography>
+          {errors.image && (
+            <Typography color="red">Image is required!</Typography>
           )}
           <Button
             type="submit"
