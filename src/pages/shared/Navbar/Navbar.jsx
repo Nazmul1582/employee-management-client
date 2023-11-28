@@ -12,9 +12,11 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "@mui/material";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const { user } = useAuth();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -132,16 +134,32 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton sx={{ p: 0 }}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="https://i.ibb.co/n11GR29/muslim-avater.jpg"
-                />
-              </IconButton>
-            </Tooltip>
-            <Button variant="contained" sx={{ml: "10px", backgroundColor: "white", color: "black"}}>Logout</Button>
-            {/* <Button href="/login" variant="contained" sx={{ml: "10px", backgroundColor: "white", color: "black"}}>Login</Button> */}
+            {user ? (
+              <>
+                <Tooltip title="Open settings">
+                  <IconButton sx={{ p: 0 }}>
+                    <Avatar
+                      alt="user profile photo"
+                      src={user.photoURL}
+                    />
+                  </IconButton>
+                </Tooltip>
+                <Button
+                  variant="contained"
+                  sx={{ ml: "10px", backgroundColor: "white", color: "black" }}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button
+                href="/login"
+                variant="contained"
+                sx={{ ml: "10px", backgroundColor: "white", color: "black" }}
+              >
+                Login
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>
