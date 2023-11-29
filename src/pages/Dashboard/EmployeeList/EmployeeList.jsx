@@ -1,19 +1,21 @@
 import { Button, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-// import CheckIcon from '@mui/icons-material/Check';
+import CheckIcon from '@mui/icons-material/Check';
 import useUser from "../../../hooks/useUser";
 import { DataGrid } from "@mui/x-data-grid";
+import axiosPublic from "../../../utils/AxiosPublic";
 
 const columns = [
   { field: "name", headerName: "Name", width: 130 },
   { field: "email", headerName: "Email", width: 180 },
   {
-    field: "varified",
-    headerName: "Varified",
+    field: "isVerified",
+    headerName: "Is Verified",
     width: 80,
     renderCell: (params) => (
-      <IconButton onClick={() => handleVarify(params.row.id)} aria-label="delete">
-        <CloseIcon />
+      <IconButton onClick={() => handleVerify(params.row.id)} aria-label="delete">
+        {params.row.isVerified ? <CheckIcon /> : <CloseIcon />}
+        {console.log("from table - ",params.row.isVerified)}
       </IconButton>
     ),
   },
@@ -46,8 +48,10 @@ const columns = [
     ),
   },
 ];
-const handleVarify = (id) => {
-  console.log(id);
+const handleVerify = async(id) => {
+  const isVerifiedUser = {isVerified: true}
+  const res = await axiosPublic.patch(`/users/${id}`, isVerifiedUser)
+  console.log(res.data);
 };
 const handlePay = (id) => {
   console.log(id);
@@ -63,7 +67,7 @@ const EmployeeList = () => {
       id: ele._id,
       name: ele.name,
       email: ele.email,
-      varified: false,
+      isVerified: ele.isVerified,
       bank_account_no: ele.bank_account_no,
       salary: ele.salary,
     };
