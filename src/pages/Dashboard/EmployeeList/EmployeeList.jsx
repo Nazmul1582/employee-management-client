@@ -21,7 +21,6 @@ const EmployeeList = () => {
           aria-label="delete"
         >
           {params.row.isVerified ? <CheckIcon /> : <CloseIcon />}
-          {console.log("from table - ", params.row.isVerified)}
         </IconButton>
       ),
     },
@@ -32,7 +31,7 @@ const EmployeeList = () => {
       headerName: "Pay",
       width: 80,
       renderCell: (params) => (
-        <Button variant="contained" onClick={() => handlePay(params.row.id)}>
+        <Button disabled={params.row.isVerified ? false : true} variant="contained" onClick={() => handlePay(params.row.id)}>
           Pay
         </Button>
       ),
