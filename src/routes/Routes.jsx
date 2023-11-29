@@ -10,6 +10,7 @@ import Progress from "../pages/Dashboard/Progress/Progress";
 import WorkSheet from "../pages/Dashboard/WorkSheet/WorkSheet";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import AllEmployeeList from "../pages/Dashboard/AllEmployeeList/AllEmployeeList";
+import axiosPublic from "../utils/AxiosPublic";
 
 const router = createBrowserRouter([
     {
@@ -39,8 +40,9 @@ const router = createBrowserRouter([
                 element: <EmployeeList />
             },
             {
-                path: "details/:id",
-                element: <Details />
+                path: "employee/:id",
+                element: <Details />,
+                loader: ({params}) => axiosPublic.get(`/users/${params.id}`)
             },
             {
                 path: "progress",
