@@ -121,7 +121,7 @@ const Navbar = () => {
                 Home
               </Button>
             </Link>
-            <Link href="/dashboard">
+            <Link href={`/dashboard?email=${user?.email}`}>
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 Dashboard
               </Button>

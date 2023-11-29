@@ -2,54 +2,62 @@ import * as React from "react";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import DetailsIcon from '@mui/icons-material/Details';
-import DonutLargeIcon from '@mui/icons-material/DonutLarge';
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import DetailsIcon from "@mui/icons-material/Details";
+import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import BarChartIcon from "@mui/icons-material/BarChart";
-import PaymentIcon from '@mui/icons-material/Payment';
-import HomeIcon from '@mui/icons-material/Home';
-import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import PaymentIcon from "@mui/icons-material/Payment";
+import HomeIcon from "@mui/icons-material/Home";
+import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import { Link } from "@mui/material";
 
-export const mainListItems = (
+export const listItemsForHR = (
   <React.Fragment>
     <ListItemButton href="/dashboard/employee-list">
       <ListItemIcon>
         <FormatListBulletedIcon />
       </ListItemIcon>
-        <ListItemText primary="Employee List" />
+      <ListItemText primary="Employee List" />
     </ListItemButton>
     <ListItemButton href="/dashboard/details">
       <ListItemIcon>
         <DetailsIcon />
       </ListItemIcon>
-        <ListItemText primary="Details" />
+      <ListItemText primary="Details" />
     </ListItemButton>
     <ListItemButton href="/dashboard/progress">
       <ListItemIcon>
         <DonutLargeIcon />
       </ListItemIcon>
-        <ListItemText primary="Progress" />
+      <ListItemText primary="Progress" />
     </ListItemButton>
+  </React.Fragment>
+);
+
+export const listItemsForEmployee = (
+  <React.Fragment>
     <ListItemButton href="/dashboard/work-sheet">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-        <ListItemText primary="Work Sheet" />
+      <ListItemText primary="Work Sheet" />
     </ListItemButton>
-
     <ListItemButton href="/dashboard/payment-history">
       <ListItemIcon>
         <PaymentIcon />
       </ListItemIcon>
-        <ListItemText primary="Payment History" />
+      <ListItemText primary="Payment History" />
     </ListItemButton>
+  </React.Fragment>
+);
 
+export const listItemsForAdmin = (
+  <React.Fragment>
     <ListItemButton href="/dashboard/all-employee-list">
       <ListItemIcon>
         <FormatListBulletedIcon />
       </ListItemIcon>
-        <ListItemText primary="All Employee List" />
+      <ListItemText primary="All Employee List" />
     </ListItemButton>
   </React.Fragment>
 );

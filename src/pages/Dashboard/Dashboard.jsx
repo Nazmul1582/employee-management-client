@@ -12,14 +12,11 @@ import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { mainListItems, secondaryListItems } from "./listItems";
-// import Paper from "@mui/material/Paper";
-// import Chart from "./Chart";
-// import Deposits from "./Deposits";
-// import Orders from "./Orders";
+import { secondaryListItems, listItemsForAdmin, listItemsForHR, listItemsForEmployee } from "./listItems";
 import { Avatar, Button, Tooltip } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
 import { Outlet } from "react-router-dom";
+import useUser from "../../hooks/useUser";
 
 const drawerWidth = 240;
 
@@ -70,6 +67,17 @@ const Drawer = styled(MuiDrawer, {
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const { user, logout } = useAuth();
+  const [users] = useUser();
+  const currentUser = users.find(ele => ele.email === user?.email)
+  let mainListItems;
+  if(currentUser?.userRole === "admin"){
+    mainListItems = listItemsForAdmin
+  }else if(currentUser?.userRole === "hr"){
+    mainListItems = listItemsForHR
+  }else if(currentUser?.userRole === "employee"){
+    mainListItems = listItemsForEmployee
+  }
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
