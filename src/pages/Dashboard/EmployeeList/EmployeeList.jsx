@@ -91,7 +91,7 @@ const EmployeeList = () => {
     console.log(id);
   };
 
-  const rows = users.map((ele) => {
+  const rows = users.filter(user => user.userRole !== "admin" && user.userRole !== "hr").map((ele) => {
     return {
       id: ele._id,
       name: ele.name,
