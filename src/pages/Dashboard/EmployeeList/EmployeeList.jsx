@@ -1,16 +1,15 @@
-import {
-  Button, IconButton
-} from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import useUser from "../../../hooks/useUser";
 import { DataGrid } from "@mui/x-data-grid";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { NavLink } from "react-router-dom";
 
 const EmployeeList = () => {
   const [users] = useUser();
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const columns = [
     { field: "name", headerName: "Name", width: 130 },
     { field: "email", headerName: "Email", width: 180 },
@@ -34,26 +33,23 @@ const EmployeeList = () => {
       headerName: "Pay",
       width: 80,
       renderCell: (params) => (
-          <Button
-            disabled={params.row.isVerified ? false : true}
-            variant="contained"
-            onClick={() => handlePay(params.row.id)}
-          >
-            Pay
-          </Button>
+        <Button
+          disabled={params.row.isVerified ? false : true}
+          variant="contained"
+          onClick={() => handlePay(params.row.id)}
+        >
+          Pay
+        </Button>
       ),
     },
     {
       field: "details",
       headerName: "Details",
-      width: 100,
+      width: 130,
       renderCell: (params) => (
-        <Button
-          onClick={() => handleButtonClick(params.row.id)}
-          variant="outlined"
-        >
-          Details
-        </Button>
+        <NavLink to={`/dashboard/employee/${params.row.id}`}>
+          <Button variant="outlined">Details</Button>
+        </NavLink>
       ),
     },
   ];
@@ -90,12 +86,12 @@ const EmployeeList = () => {
     });
   };
 
-  const handlePay = async(id) => {
+  const handlePay = async (id) => {
     const res = await axiosSecure.get(`/users/${id}`);
 
     const { value: formValues } = await Swal.fire({
-      title: 'Enter Salary Information',
-      html:`
+      title: "Enter Salary Information",
+      html: `
         <label for="salary">Salary</label>
         <input type="number" id="salary" class="swal2-input" value=${res.data.salary}>
         <label for="month">Month</label>
@@ -103,37 +99,44 @@ const EmployeeList = () => {
         <label for="year">Year</label>
         <input type="number" id="year" class="swal2-input" placeholder="Enter year">        
       `,
-      preConfirm: () =>  {
-        const salary = document.getElementById('salary').value;
-        const month = document.getElementById('month').value;
-        const year = document.getElementById('year').value;
-        const transactionId = `tid-${Date.now()}`
-        const employee = res.data.email;
-        const payDetails = {employee, salary, month, year, transactionId};
+      preConfirm: () => {
+        const salary = document.getElementById("salary").value;
+        const month = document.getElementById("month").value;
+        const year = document.getElementById("year").value;
+        const transactionId = `tid-${Date.now()}`;
+        const payDetails = {
+          name: res.data.name,
+          email: res.data.email,
+          image: res.data.image,
+          designation: res.data.designation,
+          salary,
+          month,
+          year,
+          transactionId,
+        };
         return payDetails;
-      }
+      },
     });
     if (formValues) {
-      formValues.salary = parseInt(formValues.salary)
-      formValues.year = parseInt(formValues.year)
+      formValues.salary = parseInt(formValues.salary);
+      formValues.year = parseInt(formValues.year);
       try {
-        const res = await axiosSecure.post(`/users/employee/pay-salary`, formValues)
-        if(res.data._id){
+        const res = await axiosSecure.post(
+          `/users/employee/pay-salary`,
+          formValues
+        );
+        if (res.data._id) {
           Swal.fire({
             title: "You have paid the salary!",
             icon: "success",
             timer: 1500,
-            showConfirmButton: false
+            showConfirmButton: false,
           });
-        }        
+        }
       } catch (error) {
         Swal.fire("Oops!", error.message, "error");
       }
     }
-  };
-
-  const handleButtonClick = (id) => {
-    console.log(id);
   };
 
   const rows = users
