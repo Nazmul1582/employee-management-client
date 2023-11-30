@@ -39,6 +39,9 @@ export default function SignUp() {
       const user = {
         name, email, password, userRole, bank_account_no, salary: parseInt(salary), designation, image: res.data.data.display_url
       }
+      if(user.userRole === "hr"){
+        user.isVerified = true
+      }
 
       createUser(email, password)
         .then(() => {
