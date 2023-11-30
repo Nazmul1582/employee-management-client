@@ -29,17 +29,17 @@ export const listItemsForHR = (
 
 export const listItemsForEmployee = (
   <React.Fragment>
-    <ListItemButton href="/dashboard/work-sheet">
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Work Sheet" />
-    </ListItemButton>
     <ListItemButton href="/dashboard/payment-history">
       <ListItemIcon>
         <PaymentIcon />
       </ListItemIcon>
       <ListItemText primary="Payment History" />
+    </ListItemButton>
+    <ListItemButton href="/dashboard/work-sheet">
+      <ListItemIcon>
+        <BarChartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Work Sheet" />
     </ListItemButton>
   </React.Fragment>
 );

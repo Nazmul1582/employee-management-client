@@ -9,6 +9,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { CircularProgress, Grid } from "@mui/material";
+import axiosPublic from "../utils/AxiosPublic";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -21,6 +22,17 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("current user", currentUser);
       setUser(currentUser);
+      if(currentUser){
+        // get token and set client side
+        const userInfo = {email: currentUser.email}
+        axiosPublic.post('/jwt', userInfo)
+          .then(res => {
+            localStorage.setItem("access-token", res.data.token)
+          })
+      }else{
+        // remove token
+        localStorage.removeItem("access-token")
+      }
       setLoading(false);
     });
     return () => {
