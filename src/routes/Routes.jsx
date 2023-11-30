@@ -13,6 +13,7 @@ import AllEmployeeList from "../pages/Dashboard/AllEmployeeList/AllEmployeeList"
 import axiosPublic from "../utils/AxiosPublic";
 import PrivateRoute from "./PrivateRoute";
 import NotFound from "../pages/NotFound/NotFound";
+import Contact from "../pages/Contact/Contact";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: "login",
                 element: <Login />
+            },
+            {
+                path: "contact",
+                element: <Contact />
             }
         ])
     },
