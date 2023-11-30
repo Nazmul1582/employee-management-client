@@ -8,7 +8,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { NavLink } from "react-router-dom";
 
 const EmployeeList = () => {
-  const [users] = useUser();
+  const [users, refetch] = useUser();
   const axiosSecure = useAxiosSecure();
   const columns = [
     { field: "name", headerName: "Name", width: 130 },
@@ -69,6 +69,7 @@ const EmployeeList = () => {
           const isVerifiedUser = { isVerified: true };
           const res = await axiosSecure.patch(`/users/${id}`, isVerifiedUser);
           if (res.data.modifiedCount > 0) {
+            refetch()
             Swal.fire({
               title: "Verified!",
               text: "Your user has been verified.",
