@@ -12,11 +12,13 @@ import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import AllEmployeeList from "../pages/Dashboard/AllEmployeeList/AllEmployeeList";
 import axiosPublic from "../utils/AxiosPublic";
 import PrivateRoute from "./PrivateRoute";
+import NotFound from "../pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Main />,
+        errorElement: <NotFound />,
         children: ([
             {
                 path: "/",
