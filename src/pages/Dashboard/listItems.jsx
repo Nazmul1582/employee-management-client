@@ -3,7 +3,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import DetailsIcon from "@mui/icons-material/Details";
 import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import PaymentIcon from "@mui/icons-material/Payment";
@@ -18,12 +17,6 @@ export const listItemsForHR = (
         <FormatListBulletedIcon />
       </ListItemIcon>
       <ListItemText primary="Employee List" />
-    </ListItemButton>
-    <ListItemButton href="/dashboard/details">
-      <ListItemIcon>
-        <DetailsIcon />
-      </ListItemIcon>
-      <ListItemText primary="Details" />
     </ListItemButton>
     <ListItemButton href="/dashboard/progress">
       <ListItemIcon>

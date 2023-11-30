@@ -17,7 +17,7 @@ const Chart = ({email}) => {
     const axiosSecure = useAxiosSecure()
     const data = salaries.map(item => {
         return {
-            name: item.month,
+            name: `${item.month.slice(0, 3)} ${item.year.toString().slice(-2)}`,
             salary: item.salary
         }
     })
