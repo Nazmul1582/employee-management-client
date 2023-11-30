@@ -128,12 +128,14 @@ export default function Dashboard() {
             <Button href="/" sx={{ my: 2, color: "white", display: "block" }}>
               Home
             </Button>
-            <Button
+            {
+              user && <Button
               href="/dashboard"
               sx={{ my: 2, color: "white", display: "block" }}
             >
               Dashboard
             </Button>
+            }
             <Button
               href="/contact"
               sx={{ my: 2, color: "white", display: "block" }}
@@ -141,7 +143,7 @@ export default function Dashboard() {
               Contact
             </Button>
           </Box>
-          <Box sx={{ flexGrow: 0, display: "flex", justifyContent: "center", alignItems: "center"}}>
+          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end", alignItems: "center"}}>
             {user ? (
               <>
                 <Tooltip title="Open settings">

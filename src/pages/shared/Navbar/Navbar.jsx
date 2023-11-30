@@ -81,11 +81,13 @@ const Navbar = () => {
                   <Typography textAlign="center">Home</Typography>
                 </MenuItem>
               </Link>
-              <Link underline="none" href="/dashboard">
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Dashboard</Typography>
-                </MenuItem>
-              </Link>
+              {user && (
+                <Link underline="none" href="/dashboard">
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">Dashboard</Typography>
+                  </MenuItem>
+                </Link>
+              )}
               <Link underline="none" href="/contact">
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Contact</Typography>
@@ -121,11 +123,13 @@ const Navbar = () => {
                 Home
               </Button>
             </Link>
-            <Link href={`/dashboard`}>
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
-                Dashboard
-              </Button>
-            </Link>
+            {user && (
+              <Link href={`/dashboard`}>
+                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  Dashboard
+                </Button>
+              </Link>
+            )}
             <Link href="/contact">
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 Contact

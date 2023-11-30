@@ -1,4 +1,4 @@
-import {  } from "@mui/material/styles";
+import {} from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,11 +9,16 @@ import Paper from "@mui/material/Paper";
 import { Button, TablePagination, Typography } from "@mui/material";
 import useUser from "../../../hooks/useUser";
 import React, { useState } from "react";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AllEmployeeList = () => {
-  const [users] = useUser();
-  const filteredUsers = users.filter(user => user.userRole !== "admin" && user.isVerified)
-  
+  const [users, refetch] = useUser();
+  const axiosSecure = useAxiosSecure();
+  const filteredUsers = users.filter(
+    (user) => user.userRole !== "admin" && user.isVerified
+  );
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -26,9 +31,47 @@ const AllEmployeeList = () => {
   };
 
   const visibleRows = React.useMemo(
-    () => filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+    () =>
+      filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
     [page, rowsPerPage, filteredUsers]
   );
+
+  const handleFired = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to fired this employee?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, fired!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.patch(`/users/admin/${id}`, {
+            isFired: true,
+          });
+          console.log(res);
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Fired!",
+              text: "The employee has been fired.",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            title: "Oops!",
+            text: error.message,
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <React.Fragment>
@@ -45,10 +88,18 @@ const AllEmployeeList = () => {
         <Table aria-label="customized table">
           <TableHead>
             <TableRow hover>
-              <TableCell sx={{fontWeight: "bold"}} align="center">Name</TableCell>
-              <TableCell sx={{fontWeight: "bold"}} align="center">Designation</TableCell>
-              <TableCell sx={{fontWeight: "bold"}} align="center">Make HR</TableCell>
-              <TableCell sx={{fontWeight: "bold"}} align="center">Fire</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }} align="center">
+                Name
+              </TableCell>
+              <TableCell sx={{ fontWeight: "bold" }} align="center">
+                Designation
+              </TableCell>
+              <TableCell sx={{ fontWeight: "bold" }} align="center">
+                Make HR
+              </TableCell>
+              <TableCell sx={{ fontWeight: "bold" }} align="center">
+                Fire
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -57,14 +108,21 @@ const AllEmployeeList = () => {
                 <TableCell align="center" component="th" scope="user">
                   {user.name}
                 </TableCell>
-                <TableCell align="center">
-                  {user.designation}
-                </TableCell>
+                <TableCell align="center">{user.designation}</TableCell>
                 <TableCell align="center">
                   <Button variant="outlined">Make HR</Button>
                 </TableCell>
                 <TableCell align="center">
-                  <Button variant="contained">Fire</Button>
+                  {user.isFired ? (
+                    <Typography fontWeight={600} color="red">Fired</Typography>
+                  ) : (
+                    <Button
+                      onClick={() => handleFired(user._id)}
+                      variant="contained"
+                    >
+                      Fired
+                    </Button>
+                  )}
                 </TableCell>
               </TableRow>
             ))}
@@ -82,7 +140,7 @@ const AllEmployeeList = () => {
       </TableContainer>
     </React.Fragment>
   );
-}
+};
 export default AllEmployeeList;
 
 // import { Button, IconButton } from "@mui/material";
@@ -182,7 +240,7 @@ export default AllEmployeeList;
 //         <label for="month">Month</label>
 //         <input type="text" id="month" class="swal2-input" placeholder="Enter month">
 //         <label for="year">Year</label>
-//         <input type="number" id="year" class="swal2-input" placeholder="Enter year">        
+//         <input type="number" id="year" class="swal2-input" placeholder="Enter year">
 //       `,
 //       preConfirm: () => {
 //         const salary = document.getElementById("salary").value;
