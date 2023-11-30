@@ -71,6 +71,41 @@ const AllEmployeeList = () => {
       }
     });
   };
+  const handleMakeHR = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to make this employee to HR?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, confirm!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.patch(`/users/admin/make-hr/${id}`, {
+            role: "hr",
+          });
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Fired!",
+              text: "The employee has been converted to HR.",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            title: "Oops!",
+            text: error.message,
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <React.Fragment>
@@ -109,11 +144,24 @@ const AllEmployeeList = () => {
                 </TableCell>
                 <TableCell align="center">{user.designation}</TableCell>
                 <TableCell align="center">
-                  <Button variant="outlined">Make HR</Button>
+                  {user.userRole === "hr" ? (
+                    <Typography fontWeight={600} color="green">
+                      HR
+                    </Typography>
+                  ) : (
+                    <Button
+                      onClick={() => handleMakeHR(user._id)}
+                      variant="outlined"
+                    >
+                      Make HR
+                    </Button>
+                  )}
                 </TableCell>
                 <TableCell align="center">
                   {user.isFired ? (
-                    <Typography fontWeight={600} color="red">Fired</Typography>
+                    <Typography fontWeight={600} color="red">
+                      Fired
+                    </Typography>
                   ) : (
                     <Button
                       onClick={() => handleFired(user._id)}
