@@ -1,5 +1,6 @@
 import { Avatar, Box, Container, Paper, Typography } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
+import Chart from "./Chart";
 
 const Details = () => {
   const { data: user } = useLoaderData();
@@ -7,8 +8,7 @@ const Details = () => {
     <Box>
       <Container maxWidth="xl">
         <Paper
-          elevation={6}
-          sx={{ textAlign: "center", p: 5 }}
+          sx={{ textAlign: "center", p: 3, mb: 4 }}
         >
           <Avatar
             src={user.image}
@@ -21,6 +21,9 @@ const Details = () => {
           <Typography variant="h6" fontWeight={500}>
             Designation: {user.designation}
           </Typography>
+        </Paper>
+        <Paper sx={{p: 3, height: 400}}>
+            <Chart email={user.email} />
         </Paper>
       </Container>
     </Box>
