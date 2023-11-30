@@ -8,7 +8,6 @@ import {
   Paper,
   Select,
   TextField,
-  Typography,
 } from "@mui/material";
 
 const WorkSheet = () => {
@@ -22,14 +21,10 @@ const WorkSheet = () => {
             sx={{
               padding: 5,
               display: "flex",
-              flexDirection: "column",
               gap: 3,
               mx: "auto",
             }}
           >
-            <Typography variant="h6" fontWeight={600} textAlign="center">
-              Work Sheet
-            </Typography>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Tasks</InputLabel>
               <Select
