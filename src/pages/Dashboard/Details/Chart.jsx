@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -10,11 +9,10 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useSalary from "../../../hooks/useSalary";
 
 const Chart = ({email}) => {
-    const [salaries, setSalaries] = useState([])
-    const axiosSecure = useAxiosSecure()
+    const [salaries] = useSalary(email)
     const data = salaries.map(item => {
         return {
             name: `${item.month.slice(0, 3)} ${item.year.toString().slice(-2)}`,
@@ -22,15 +20,6 @@ const Chart = ({email}) => {
         }
     })
 
-    useEffect(() => {
-        const getSalaries = async() => {
-            const res = await axiosSecure.get(`/users/employee/salaries?email=${email}`)
-            const data = await res.data;
-            setSalaries(data)
-        }
-        getSalaries()
-        .catch(error => console.log(error))
-    }, [email, axiosSecure])
 
   return (
     <ResponsiveContainer width="100%" height="100%">
