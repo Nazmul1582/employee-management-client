@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   FormControl,
+  Grid,
   InputLabel,
   MenuItem,
   Paper,
@@ -13,7 +14,9 @@ import {
   TableHead,
   TableRow,
   TextField,
+  Typography,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -28,9 +31,20 @@ const rows = [
 ];
 
 export default function WorkSheet() {
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log("from work sheet");
+    console.log(data);
+  };
   return (
     <Box>
-      <TableContainer sx={{mb: 5}}>
+      <TableContainer sx={{ mb: 5 }}>
         <Table sx={{ minWidth: 500 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -41,48 +55,86 @@ export default function WorkSheet() {
           <TableBody>
             <TableRow>
               <TableCell>
-                <Paper
-                  component="form"
-                  elevation={2}
-                  sx={{
-                    padding: {
-                      xs: 2,
-                      md: 5,
-                    },
-                    display: "flex",
-                    gap: 1,
-                  }}
-                >
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Tasks</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      label="Tasks"
-                      value=""
+                <Box component={Paper}>
+                  <Grid
+                    onSubmit={handleSubmit(onSubmit)}
+                    component="form"
+                    elevation={2}
+                    sx={{
+                      padding: {
+                        xs: 2,
+                        md: 5,
+                      },
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                    }}
+                  >
+                    <Grid
+                      width={"100%"}
+                      display="flex"
+                      flexDirection="column"
+                      gap={1}
                     >
-                      <MenuItem value="sales">Sales</MenuItem>
-                      <MenuItem value="support">Support</MenuItem>
-                      <MenuItem value="content">Content</MenuItem>
-                      <MenuItem value="paper-work">Paper Work</MenuItem>
-                    </Select>
-                  </FormControl>
-                  <TextField
-                    type="number"
-                    id="outlined-basic"
-                    label="Hours"
-                    variant="filled"
-                    fullWidth
-                  />
-                  <TextField
-                    type="date"
-                    id="outlined-basic"
-                    label="Date"
-                    variant="filled"
-                    fullWidth
-                  />
-                  <Button fullWidth variant="contained">Add</Button>
-                </Paper>
+                      <Controller
+                        name="task"
+                        rules={{ required: true }}
+                        control={control}
+                        defaultValue=""
+                        render={({ field }) => (
+                          <FormControl fullWidth>
+                            <InputLabel>Task</InputLabel>
+                            <Select label="Task" {...field}>
+                              <MenuItem value="sales">Sales</MenuItem>
+                              <MenuItem value="support">Support</MenuItem>
+                              <MenuItem value="content">Content</MenuItem>
+                              <MenuItem value="paper-work">Paper Work</MenuItem>
+                            </Select>
+                          </FormControl>
+                        )}
+                      />
+                      {errors.task && (
+                        <Typography color="red">Task is required!</Typography>
+                      )}
+                    </Grid>
+                    <Grid
+                      width={"100%"}
+                      display="flex"
+                      flexDirection="column"
+                      gap={1}
+                    >
+                      <TextField
+                        type="number"
+                        label="Hours"
+                        variant="filled"
+                        fullWidth
+                        {...register("hours", { required: true })}
+                      />
+                      {errors.hours && (
+                        <Typography color="red">Hours is required!</Typography>
+                      )}
+                    </Grid>
+                    <Grid
+                      width={"100%"}
+                      display="flex"
+                      flexDirection="column"
+                      gap={1}
+                    >
+                      <TextField
+                        type="date"
+                        label="Date"
+                        variant="filled"
+                        {...register("date", { required: true })}
+                      />
+                      {errors.date && (
+                        <Typography color="red">Date is required!</Typography>
+                      )}
+                    </Grid>
+                    <Button type="submit" fullWidth variant="contained">
+                      Add
+                    </Button>
+                  </Grid>
+                </Box>
               </TableCell>
             </TableRow>
           </TableBody>
