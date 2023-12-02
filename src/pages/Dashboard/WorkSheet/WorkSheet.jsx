@@ -26,7 +26,10 @@ export default function WorkSheet() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [workSheet, refetch] = useWorkSheet(user.email);
-  console.log(workSheet);
+
+  const changeDateFormat = (dateString) => {
+    return new Date(dateString).toLocaleDateString(undefined, {year: "numeric", month: "numeric", day: "2-digit"})
+  }
   const {
     register,
     handleSubmit,
@@ -35,7 +38,6 @@ export default function WorkSheet() {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
     const { task, hours, date } = data;
     const submittedTask = {
       task,
@@ -198,7 +200,7 @@ export default function WorkSheet() {
                     {task.task}
                   </TableCell>
                   <TableCell align="center">{task.hours} Hours</TableCell>
-                  <TableCell align="center">{task.date}</TableCell>
+                  <TableCell align="center">{changeDateFormat(task.date)}</TableCell>
                 </TableRow>
               ))
             )}
