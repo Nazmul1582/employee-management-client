@@ -1,6 +1,6 @@
 import {
+  Box,
   Button,
-  Container,
   FormControl,
   Grid,
   InputLabel,
@@ -12,18 +12,21 @@ import {
 
 const WorkSheet = () => {
   return (
-    <Container maxWidth="xl" sx={{ py: "80px" }}>
-      <Grid container>
-        <Grid item xs={12} md={6} lg={8}>
+    <Box sx={{ py: "80px" }}>
+      <Grid container justifyContent="center">
           <Paper
             component="form"
             elevation={2}
             sx={{
-              padding: 5,
+              // minWidth: "450px",
+              padding: {
+                xs: 1,
+                md: 5
+              },
               display: "flex",
-              gap: 3,
+              gap: 1,
               mx: "auto",
-            }}
+            }}            
           >
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Tasks</InputLabel>
@@ -31,19 +34,19 @@ const WorkSheet = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 label="Tasks"
+                value=""
               >
                 <MenuItem value={10}>A</MenuItem>
                 <MenuItem value={20}>B</MenuItem>
                 <MenuItem value={30}>C</MenuItem>
               </Select>
             </FormControl>
-            <TextField id="outlined-basic" label="Hours" variant="filled" />
-            <TextField id="outlined-basic" label="Date" variant="filled" />
-            <Button variant="contained">Submit</Button>
+            <TextField  InputLabelProps={{sx: {fontSize: {xs: 10, md: 16}}}} id="outlined-basic" label="Hours" variant="filled" />
+            <TextField  InputLabelProps={{sx: {fontSize: {xs: 10, md: 16}}}} id="outlined-basic" label="Date" variant="filled" />
+            <Button variant="contained">Add</Button>
           </Paper>
         </Grid>
-      </Grid>
-    </Container>
+    </Box>
   );
 };
 
