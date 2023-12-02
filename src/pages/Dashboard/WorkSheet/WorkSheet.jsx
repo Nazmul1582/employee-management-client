@@ -20,6 +20,7 @@ import { Controller, useForm } from "react-hook-form";
 import useAuth from '../../../hooks/useAuth'
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useWorkSheet from "../../../hooks/useWorkSheet";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -36,6 +37,8 @@ const rows = [
 export default function WorkSheet() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [workSheet, refetch] = useWorkSheet(user.email);
+  console.log(workSheet);
   const {
     register,
     handleSubmit,
@@ -46,7 +49,7 @@ export default function WorkSheet() {
   const onSubmit = async(data) => {
     console.log(data);
     const { task, hours, date} = data;
-    const workSheet = {
+    const submittedTask = {
       task,
       hours,
       date,
@@ -54,8 +57,9 @@ export default function WorkSheet() {
       email: user.email,
     }
     try{
-      const res = await axiosSecure.post("/users/employee/work-sheets", workSheet);
+      const res = await axiosSecure.post("/users/employee/work-sheet", submittedTask);
       if(res.data){
+        refetch()
         Swal.fire("Your task submitted successfully", "", "success")
       }
     }catch(error){
