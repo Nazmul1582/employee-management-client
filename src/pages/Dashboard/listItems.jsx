@@ -8,70 +8,80 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import PaymentIcon from "@mui/icons-material/Payment";
 import HomeIcon from "@mui/icons-material/Home";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import { Link } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 export const listItemsForHR = (
   <React.Fragment>
-    <ListItemButton href="/dashboard/employee-list">
+    <NavLink to="/dashboard/employee-list" style={{textDecoration: "none", color:"black"}}>
+    <ListItemButton>
       <ListItemIcon>
         <FormatListBulletedIcon />
       </ListItemIcon>
       <ListItemText primary="Employee List" />
     </ListItemButton>
-    <ListItemButton href="/dashboard/progress">
+    </NavLink>
+    <NavLink to="/dashboard/progress" style={{textDecoration: "none", color:"black"}}>
+    <ListItemButton>
       <ListItemIcon>
         <DonutLargeIcon />
       </ListItemIcon>
       <ListItemText primary="Progress" />
     </ListItemButton>
+    </NavLink>
   </React.Fragment>
 );
 
 export const listItemsForEmployee = (
   <React.Fragment>
-    <ListItemButton href="/dashboard/payment-history">
+    <NavLink to="/dashboard/payment-history" style={{textDecoration: "none", color:"black"}}>
+    <ListItemButton>
       <ListItemIcon>
         <PaymentIcon />
       </ListItemIcon>
       <ListItemText primary="Payment History" />
     </ListItemButton>
-    <ListItemButton href="/dashboard/work-sheet">
+    </NavLink>
+    <NavLink to="/dashboard/work-sheet" style={{textDecoration: "none", color:"black"}}>
+    <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Work Sheet" />
     </ListItemButton>
+    </NavLink>
   </React.Fragment>
 );
 
 export const listItemsForAdmin = (
   <React.Fragment>
-    <ListItemButton href="/dashboard/all-employee-list">
+    <NavLink to="/dashboard/all-employee-list" style={{textDecoration: "none", color:"black"}}>
+    <ListItemButton>
       <ListItemIcon>
         <FormatListBulletedIcon />
       </ListItemIcon>
       <ListItemText primary="All Employee List" />
     </ListItemButton>
+    </NavLink>
   </React.Fragment>
 );
 
 export const secondaryListItems = (
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <Link href="/" underline="none" color="black">
+    <NavLink to="/" style={{textDecoration: "none", color: "black"}}>
+      <ListItemButton>
+        <ListItemIcon>
+          <HomeIcon />
+        </ListItemIcon>
         <ListItemText primary="Home" />
-      </Link>
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PermContactCalendarIcon />
-      </ListItemIcon>
-      <Link href="/contact" underline="none" color="black">
+      </ListItemButton>
+    </NavLink>
+    <NavLink to="/contact" style={{textDecoration: "none", color: "black"}}>
+      <ListItemButton>
+        <ListItemIcon>
+          <PermContactCalendarIcon />
+        </ListItemIcon>
         <ListItemText primary="Contact" />
-      </Link>
-    </ListItemButton>
+      </ListItemButton>
+    </NavLink>
   </React.Fragment>
 );

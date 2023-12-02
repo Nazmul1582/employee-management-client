@@ -12,10 +12,15 @@ import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { secondaryListItems, listItemsForAdmin, listItemsForHR, listItemsForEmployee } from "./listItems";
+import {
+  secondaryListItems,
+  listItemsForAdmin,
+  listItemsForHR,
+  listItemsForEmployee,
+} from "./listItems";
 import { Avatar, Button, Tooltip } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import useUser from "../../hooks/useUser";
 
 const drawerWidth = 240;
@@ -68,14 +73,14 @@ export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const { user, logout } = useAuth();
   const [users] = useUser();
-  const currentUser = users.find(ele => ele.email === user?.email)
+  const currentUser = users.find((ele) => ele.email === user?.email);
   let mainListItems;
-  if(currentUser?.userRole === "admin"){
-    mainListItems = listItemsForAdmin
-  }else if(currentUser?.userRole === "hr"){
-    mainListItems = listItemsForHR
-  }else if(currentUser?.userRole === "employee"){
-    mainListItems = listItemsForEmployee
+  if (currentUser?.userRole === "admin") {
+    mainListItems = listItemsForAdmin;
+  } else if (currentUser?.userRole === "hr") {
+    mainListItems = listItemsForHR;
+  } else if (currentUser?.userRole === "employee") {
+    mainListItems = listItemsForEmployee;
   }
 
   const toggleDrawer = () => {
@@ -88,7 +93,7 @@ export default function Dashboard() {
       <AppBar position="absolute" open={open}>
         <Toolbar
           sx={{
-            pr: "8px", // keep right padding when drawer closed
+            pr: "8px",
           }}
         >
           <IconButton
@@ -103,48 +108,31 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              fontFamily: "sans-serif",
-              fontWeight: 700,
-              color: "inherit",
-              width: "fit-content",
-              textDecoration: "none",
-            }}
-          >
-            TalentPulse
-          </Typography>
+          <NavLink style={{textDecoration:"none",}} to="/">
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                mr: 2,
+                fontFamily: "sans-serif",
+                fontWeight: 700,
+                color: "white",
+                width: "fit-content",
+                textDecoration: "none",
+              }}
+            >
+              TalentPulse
+            </Typography>
+          </NavLink>
           <Box
             sx={{
               flexGrow: 1,
-              display: { xs: "none", md: "flex", justifyContent: "center" },
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
             }}
           >
-            <Button href="/" sx={{ my: 2, color: "white", display: "block" }}>
-              Home
-            </Button>
-            {
-              user && <Button
-              href="/dashboard"
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              Dashboard
-            </Button>
-            }
-            <Button
-              href="/contact"
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              Contact
-            </Button>
-          </Box>
-          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end", alignItems: "center"}}>
-            {user ? (
+            {user && (
               <>
                 <Tooltip title="Open settings">
                   <IconButton sx={{ p: 0 }}>
@@ -159,14 +147,6 @@ export default function Dashboard() {
                   Logout
                 </Button>
               </>
-            ) : (
-              <Button
-                href="/login"
-                variant="contained"
-                sx={{ ml: "10px", backgroundColor: "white", color: "black" }}
-              >
-                Login
-              </Button>
             )}
           </Box>
         </Toolbar>
@@ -205,7 +185,7 @@ export default function Dashboard() {
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Outlet />
+          <Outlet />
         </Container>
       </Box>
     </Box>
