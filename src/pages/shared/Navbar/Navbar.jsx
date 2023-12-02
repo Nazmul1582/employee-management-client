@@ -11,7 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
@@ -30,22 +30,22 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "sans-serif",
-              fontWeight: 700,
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            TalentPulse
-          </Typography>
+          <Link style={{ textDecoration: "none" }} to="/">
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "sans-serif",
+                fontWeight: 700,
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
+              TalentPulse
+            </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -76,61 +76,66 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <Link underline="none" href="/">
+              <Link style={{ textDecoration: "none", color: "black" }} to="/">
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Home</Typography>
                 </MenuItem>
               </Link>
               {user && (
-                <Link underline="none" href="/dashboard">
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/dashboard"
+                >
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">Dashboard</Typography>
                   </MenuItem>
                 </Link>
               )}
-              <Link underline="none" href="/contact">
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                to="/contact"
+              >
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Contact</Typography>
                 </MenuItem>
               </Link>
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "sans-serif",
-              fontWeight: 700,
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            TalentPulse
-          </Typography>
+          <Link style={{ textDecoration: "none", flexGrow: 1 }} to="/">
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                fontFamily: "sans-serif",
+                fontWeight: 700,
+                color: "white",
+                textDecoration: "none",
+              }}
+              >
+              TalentPulse
+            </Typography>
+          </Link>
           <Box
             sx={{
               flexGrow: 1,
               display: { xs: "none", md: "flex", justifyContent: "center" },
             }}
           >
-            <Link href="/">
+            <Link style={{ textDecoration: "none" }} to="/">
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 Home
               </Button>
             </Link>
             {user && (
-              <Link href={`/dashboard`}>
+              <Link style={{ textDecoration: "none" }} to={`/dashboard`}>
                 <Button sx={{ my: 2, color: "white", display: "block" }}>
                   Dashboard
                 </Button>
               </Link>
             )}
-            <Link href="/contact">
+            <Link style={{ textDecoration: "none" }} to="/contact">
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 Contact
               </Button>
@@ -154,13 +159,14 @@ const Navbar = () => {
                 </Button>
               </>
             ) : (
-              <Button
-                href="/login"
-                variant="contained"
-                sx={{ ml: "10px", backgroundColor: "white", color: "black" }}
-              >
-                Login
-              </Button>
+              <Link to="/login">
+                <Button
+                  variant="contained"
+                  sx={{ ml: "10px", backgroundColor: "white", color: "black" }}
+                >
+                  Login
+                </Button>
+              </Link>
             )}
           </Box>
         </Toolbar>
