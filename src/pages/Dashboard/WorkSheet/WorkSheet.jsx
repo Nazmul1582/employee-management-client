@@ -17,22 +17,10 @@ import {
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import useAuth from '../../../hooks/useAuth'
+import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useWorkSheet from "../../../hooks/useWorkSheet";
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
 
 export default function WorkSheet() {
   const { user } = useAuth();
@@ -46,25 +34,28 @@ export default function WorkSheet() {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    const { task, hours, date} = data;
+    const { task, hours, date } = data;
     const submittedTask = {
       task,
       hours,
       date,
       name: user.displayName,
       email: user.email,
-    }
-    try{
-      const res = await axiosSecure.post("/users/employee/work-sheet", submittedTask);
-      if(res.data){
-        refetch()
-        Swal.fire("Your task submitted successfully", "", "success")
+    };
+    try {
+      const res = await axiosSecure.post(
+        "/users/employee/work-sheet",
+        submittedTask
+      );
+      if (res.data) {
+        refetch();
+        Swal.fire("Your task submitted successfully", "", "success");
       }
-    }catch(error){
+    } catch (error) {
       console.log(error);
-      Swal.fire("Oops!", error.message, "error")
+      Swal.fire("Oops!", error.message, "error");
     }
     reset();
   };
@@ -171,24 +162,46 @@ export default function WorkSheet() {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="center">Tasks</TableCell>
-              <TableCell align="center">Hours</TableCell>
-              <TableCell align="center">Date</TableCell>
+              <TableCell align="center" sx={{ fontWeight: 600 }}>
+                Tasks Name
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: 600 }}>
+                Hours
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: 600 }}>
+                Date
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="center" component="th" scope="row">
-                  {row.name}
+            {workSheet.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={3}>
+                  <Typography
+                    component="h3"
+                    variant="h6"
+                    fontWeight={600}
+                    textAlign="center"
+                    my={5}
+                  >
+                    No task available
+                  </Typography>
                 </TableCell>
-                <TableCell align="center">{row.calories}</TableCell>
-                <TableCell align="center">{row.fat}</TableCell>
               </TableRow>
-            ))}
+            ) : (
+              workSheet.map((task) => (
+                <TableRow
+                  key={task._id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell align="center" component="th" scope="row">
+                    {task.task}
+                  </TableCell>
+                  <TableCell align="center">{task.hours} Hours</TableCell>
+                  <TableCell align="center">{task.date}</TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </TableContainer>
