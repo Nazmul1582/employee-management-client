@@ -4,6 +4,7 @@ import {
   FormControl,
   Grid,
   InputLabel,
+  LinearProgress,
   MenuItem,
   Paper,
   Select,
@@ -26,7 +27,7 @@ import changeDateFormat from "../../../utils/changeDateFormat";
 export default function WorkSheet() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const [workSheet, refetch] = useWorkSheet(user.email);
+  const [workSheet, refetch, loading] = useWorkSheet(user.email);
   const {
     register,
     handleSubmit,
@@ -160,7 +161,7 @@ export default function WorkSheet() {
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
-            <TableRow>
+            <TableRow hover>
               <TableCell align="center" sx={{ fontWeight: 600 }}>
                 Tasks Name
               </TableCell>
@@ -173,8 +174,14 @@ export default function WorkSheet() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {workSheet.length === 0 ? (
+            {loading ? (
               <TableRow>
+                <TableCell colSpan={3}>
+                  <LinearProgress sx={{ m: 3 }} />
+                </TableCell>
+              </TableRow>
+            ) : workSheet.length === 0 ? (
+              <TableRow hover>
                 <TableCell colSpan={3}>
                   <Typography
                     component="h3"
@@ -192,12 +199,15 @@ export default function WorkSheet() {
                 <TableRow
                   key={task._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  hover
                 >
                   <TableCell align="center" component="th" scope="row">
                     {task.task}
                   </TableCell>
                   <TableCell align="center">{task.hours} Hours</TableCell>
-                  <TableCell align="center">{changeDateFormat(task.date)}</TableCell>
+                  <TableCell align="center">
+                    {changeDateFormat(task.date)}
+                  </TableCell>
                 </TableRow>
               ))
             )}

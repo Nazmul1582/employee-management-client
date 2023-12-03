@@ -120,7 +120,7 @@ const Navbar = () => {
           <Box
             sx={{
               flexGrow: 1,
-              display: { xs: "none", md: "flex", justifyContent: "center" },
+              display: { xs: "none", md: "flex" },
             }}
           >
             <Link style={{ textDecoration: "none" }} to="/">

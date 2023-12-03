@@ -1,4 +1,5 @@
 import {
+  LinearProgress,
   Paper,
   Table,
   TableBody,
@@ -13,13 +14,14 @@ import changeDateFormat from "../../../utils/changeDateFormat";
 import useWorkSheet from "../../../hooks/useWorkSheet";
 
 const Progress = () => {
-  const [workSheet] = useWorkSheet();
+  const [workSheet, , loading] = useWorkSheet();
+  console.log(loading);
 
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
         <TableHead>
-          <TableRow>
+          <TableRow hover>
             <TableCell align="center" sx={{ fontWeight: 600 }}>
               Tasks Name
             </TableCell>
@@ -32,8 +34,14 @@ const Progress = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {workSheet.length === 0 ? (
-            <TableRow>
+          {loading ? (
+            <TableRow hover>
+              <TableCell colSpan={3}>
+                <LinearProgress sx={{ m: 3 }} />
+              </TableCell>
+            </TableRow>
+          ) : workSheet.length === 0 ? (
+            <TableRow hover>
               <TableCell colSpan={3}>
                 <Typography
                   component="h3"
@@ -51,6 +59,7 @@ const Progress = () => {
               <TableRow
                 key={task._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                hover
               >
                 <TableCell align="center" component="th" scope="row">
                   {task.task}
