@@ -21,15 +21,12 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useWorkSheet from "../../../hooks/useWorkSheet";
+import changeDateFormat from "../../../utils/changeDateFormat";
 
 export default function WorkSheet() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [workSheet, refetch] = useWorkSheet(user.email);
-
-  const changeDateFormat = (dateString) => {
-    return new Date(dateString).toLocaleDateString(undefined, {year: "numeric", month: "numeric", day: "2-digit"})
-  }
   const {
     register,
     handleSubmit,
