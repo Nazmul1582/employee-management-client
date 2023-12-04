@@ -1,6 +1,10 @@
 import {
+  FormControl,
+  InputLabel,
   LinearProgress,
+  MenuItem,
   Paper,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -12,10 +16,27 @@ import {
 
 import changeDateFormat from "../../../utils/changeDateFormat";
 import useWorkSheet from "../../../hooks/useWorkSheet";
+import { useState } from "react";
 
 const Progress = () => {
   const [workSheet, , loading] = useWorkSheet();
-  console.log(loading);
+  const [employeeName, setEmployeeName] = useState("")
+
+  const getUniqueEmployeesName = (sheet) => {
+    const uniqueEmployees = new Set();
+    sheet.forEach(task => {
+      uniqueEmployees.add(task.name)
+    })
+    return Array.from(uniqueEmployees)
+  }
+  const employees = getUniqueEmployeesName(workSheet)
+
+  const tasks = workSheet.filter(task => {
+    if(employeeName){
+    return task.name === employeeName;
+    }
+    return task;
+  })
 
   return (
     <TableContainer component={Paper}>
@@ -23,7 +44,23 @@ const Progress = () => {
         <TableHead>
           <TableRow hover>
             <TableCell align="center" sx={{ fontWeight: 600 }}>
-              Tasks Name
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Employee</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={employeeName}
+                  label="Employee"
+                  onChange={(e) => {setEmployeeName(e.target.value)}}
+                >
+                  {
+                    employees.map((name, index) => <MenuItem key={index} value={name}>{name}</MenuItem>)
+                  }
+                </Select>
+              </FormControl>
+            </TableCell>
+            <TableCell align="center" sx={{ fontWeight: 600 }}>
+              Tasks
             </TableCell>
             <TableCell align="center" sx={{ fontWeight: 600 }}>
               Hours
@@ -40,7 +77,7 @@ const Progress = () => {
                 <LinearProgress sx={{ m: 3 }} />
               </TableCell>
             </TableRow>
-          ) : workSheet.length === 0 ? (
+          ) : tasks.length === 0 ? (
             <TableRow hover>
               <TableCell colSpan={3}>
                 <Typography
@@ -55,12 +92,15 @@ const Progress = () => {
               </TableCell>
             </TableRow>
           ) : (
-            workSheet.map((task) => (
+            tasks.map((task) => (
               <TableRow
                 key={task._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 hover
               >
+                <TableCell align="center" component="th" scope="row">
+                  {task.name}
+                </TableCell>
                 <TableCell align="center" component="th" scope="row">
                   {task.task}
                 </TableCell>
