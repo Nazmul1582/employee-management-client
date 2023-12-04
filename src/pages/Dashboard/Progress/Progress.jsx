@@ -21,6 +21,7 @@ import { useState } from "react";
 const Progress = () => {
   const [workSheet, , loading] = useWorkSheet();
   const [employeeName, setEmployeeName] = useState("")
+  const [month, setMonth] = useState("");
 
   const getUniqueEmployeesName = (sheet) => {
     const uniqueEmployees = new Set();
@@ -32,7 +33,6 @@ const Progress = () => {
   const employees = getUniqueEmployeesName(workSheet)
 
   const tasks = workSheet.filter(task => {
-    console.log(Boolean(employeeName), employeeName);
     if(!employeeName){
       return task;
     }else if(employeeName === "all-employee"){
@@ -40,6 +40,21 @@ const Progress = () => {
     }
     return task.name === employeeName;
   })
+
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
 
   return (
     <TableContainer component={Paper}>
@@ -70,7 +85,22 @@ const Progress = () => {
               Hours
             </TableCell>
             <TableCell align="center" sx={{ fontWeight: 600 }}>
-              Date
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Select Month</InputLabel>
+                <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={month}
+                defaultValue="Select"
+                label="Month"
+                onChange={(e) => setMonth(e.target.value)}
+                >
+                  <MenuItem value="Select">Select Month</MenuItem>
+                  {
+                    months.map((month) => <MenuItem key={month} value={month}>{month}</MenuItem>)
+                  }
+                </Select>
+              </FormControl>
             </TableCell>
           </TableRow>
         </TableHead>
