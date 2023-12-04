@@ -32,10 +32,13 @@ const Progress = () => {
   const employees = getUniqueEmployeesName(workSheet)
 
   const tasks = workSheet.filter(task => {
-    if(employeeName){
-    return task.name === employeeName;
+    console.log(Boolean(employeeName), employeeName);
+    if(!employeeName){
+      return task;
+    }else if(employeeName === "all-employee"){
+      return task;
     }
-    return task;
+    return task.name === employeeName;
   })
 
   return (
@@ -45,7 +48,7 @@ const Progress = () => {
           <TableRow hover>
             <TableCell align="center" sx={{ fontWeight: 600 }}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Employee</InputLabel>
+                <InputLabel id="demo-simple-select-label">Employee Name</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
@@ -53,6 +56,7 @@ const Progress = () => {
                   label="Employee"
                   onChange={(e) => {setEmployeeName(e.target.value)}}
                 >
+                  <MenuItem value="all-employee">All Employees</MenuItem>
                   {
                     employees.map((name, index) => <MenuItem key={index} value={name}>{name}</MenuItem>)
                   }
@@ -73,13 +77,13 @@ const Progress = () => {
         <TableBody>
           {loading ? (
             <TableRow hover>
-              <TableCell colSpan={3}>
+              <TableCell colSpan={4}>
                 <LinearProgress sx={{ m: 3 }} />
               </TableCell>
             </TableRow>
           ) : tasks.length === 0 ? (
             <TableRow hover>
-              <TableCell colSpan={3}>
+              <TableCell colSpan={4}>
                 <Typography
                   component="h3"
                   variant="h6"
