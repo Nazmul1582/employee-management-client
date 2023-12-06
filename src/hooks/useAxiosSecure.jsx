@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const axiosSecure = axios.create({
-  // baseURL: "https://talent-pulse-server.vercel.app"
-  baseURL: "http://localhost:5000",
+  baseURL: "https://talent-pulse-server.vercel.app"
+  // baseURL: "http://localhost:5000",
 });
 const useAxiosSecure = () => {
   const { logout } = useAuth();
@@ -32,7 +32,7 @@ const useAxiosSecure = () => {
       },
       async function (error) {
         console.log(error);
-        const status = error.response.status;
+        const status = error?.response?.status;
         if (status === 401 || status === 403) {
           await logout();
           navigate("/login");

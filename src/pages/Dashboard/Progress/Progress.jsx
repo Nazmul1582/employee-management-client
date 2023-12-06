@@ -20,8 +20,8 @@ import { useState } from "react";
 
 const Progress = () => {
   const [workSheet, , loading] = useWorkSheet();
-  const [employeeName, setEmployeeName] = useState("")
-  const [month, setMonth] = useState("");
+  const [selectedEmployee, setSelectedEmployee] = useState("all-employees")
+  const [selectedMonth, setSelectedMonth] = useState("all-months");
 
   const getUniqueEmployeesName = (sheet) => {
     const uniqueEmployees = new Set();
@@ -30,31 +30,31 @@ const Progress = () => {
     })
     return Array.from(uniqueEmployees)
   }
-  const employees = getUniqueEmployeesName(workSheet)
 
-  const tasks = workSheet.filter(task => {
-    if(!employeeName){
-      return task;
-    }else if(employeeName === "all-employee"){
-      return task;
-    }
-    return task.name === employeeName;
-  })
+  const uniqueEmployeesName = getUniqueEmployeesName(workSheet)
 
   const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
+    {"id": "01", "name": "January"},
+    {"id": "02", "name": "February"},
+    {"id": "03", "name": "March"},
+    {"id": "04", "name": "April"},
+    {"id": "05", "name": "May"},
+    {"id": "06", "name": "June"},
+    {"id": "07", "name": "July"},
+    {"id": "08", "name": "August"},
+    {"id": "09", "name": "September"},
+    {"id": "10", "name": "October"},
+    {"id": "11", "name": "November"},
+    {"id": "12", "name": "December"}
+  ]
+
+  const tasks = workSheet.filter(task => {
+    const dateFilter = selectedMonth === "all-months" || task.date.includes(`-${selectedMonth}-`)
+    if(selectedEmployee === "all-employees" && dateFilter) {
+      return task;
+    }
+    return task.name.includes(selectedEmployee) && dateFilter;
+  })
 
   return (
     <TableContainer component={Paper}>
@@ -67,13 +67,13 @@ const Progress = () => {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={employeeName}
+                  value={selectedEmployee}
                   label="Employee"
-                  onChange={(e) => {setEmployeeName(e.target.value)}}
+                  onChange={(e) => {setSelectedEmployee(e.target.value)}}
                 >
-                  <MenuItem value="all-employee">All Employees</MenuItem>
+                  <MenuItem value="all-employees">All Employees</MenuItem>
                   {
-                    employees.map((name, index) => <MenuItem key={index} value={name}>{name}</MenuItem>)
+                    uniqueEmployeesName.map((name, index) => <MenuItem key={index} value={name}>{name}</MenuItem>)
                   }
                 </Select>
               </FormControl>
@@ -86,18 +86,18 @@ const Progress = () => {
             </TableCell>
             <TableCell align="center" sx={{ fontWeight: 600 }}>
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Select Month</InputLabel>
+                <InputLabel id="demo-simple-select-label">All Months</InputLabel>
                 <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={month}
-                defaultValue="Select"
+                value={selectedMonth}
+                defaultValue="all-months"
                 label="Month"
-                onChange={(e) => setMonth(e.target.value)}
+                onChange={(e) => setSelectedMonth(e.target.value)}
                 >
-                  <MenuItem value="Select">Select Month</MenuItem>
+                  <MenuItem value="all-months">All Months</MenuItem>
                   {
-                    months.map((month) => <MenuItem key={month} value={month}>{month}</MenuItem>)
+                    months.map((month) => <MenuItem key={month.id} value={month.id}>{month.name}</MenuItem>)
                   }
                 </Select>
               </FormControl>

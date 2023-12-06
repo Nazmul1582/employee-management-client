@@ -101,7 +101,7 @@ export default function WorkSheet() {
                         render={({ field }) => (
                           <FormControl fullWidth>
                             <InputLabel>Task</InputLabel>
-                            <Select label="Task" {...field}>
+                            <Select variant="filled" label="Task" {...field}>
                               <MenuItem value="sales">Sales</MenuItem>
                               <MenuItem value="support">Support</MenuItem>
                               <MenuItem value="content">Content</MenuItem>
