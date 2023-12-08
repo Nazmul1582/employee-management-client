@@ -51,7 +51,12 @@ export default function WorkSheet() {
       );
       if (res.data) {
         refetch();
-        Swal.fire("Your task submitted successfully", "", "success");
+        Swal.fire({
+          icon: "success",
+          title: "Your task submitted successfully",
+          showConfirmButton: false,
+          timer: 2000
+        });
       }
     } catch (error) {
       console.log(error);

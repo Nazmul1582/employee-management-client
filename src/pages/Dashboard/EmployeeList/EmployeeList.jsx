@@ -6,6 +6,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { NavLink } from "react-router-dom";
+import axiosPublic from "../../../utils/AxiosPublic";
 
 const EmployeeList = () => {
   const [users, refetch] = useUser();
@@ -36,7 +37,7 @@ const EmployeeList = () => {
         <Button
           disabled={params.row.isVerified ? false : true}
           variant="contained"
-          onClick={() => handlePay(params.row.id)}
+          onClick={() => handlePay(params.row.email)}
         >
           Pay
         </Button>
@@ -47,7 +48,7 @@ const EmployeeList = () => {
       headerName: "Details",
       width: 130,
       renderCell: (params) => (
-        <NavLink to={`/dashboard/employee/${params.row.id}`}>
+        <NavLink to={`/dashboard/employee/${params.row.email}`}>
           <Button variant="outlined">Details</Button>
         </NavLink>
       ),
@@ -87,8 +88,8 @@ const EmployeeList = () => {
     });
   };
 
-  const handlePay = async (id) => {
-    const res = await axiosSecure.get(`/users/${id}`);
+  const handlePay = async (email) => {
+    const res = await axiosPublic.get(`/users/${email}`);
 
     const { value: formValues } = await Swal.fire({
       title: "Enter Salary Information",
@@ -100,6 +101,9 @@ const EmployeeList = () => {
         <label for="year">Year</label>
         <input type="number" id="year" class="swal2-input" placeholder="Enter year">        
       `,
+      showCancelButton: true,
+      cancelButtonColor: "#d33",
+      confirmButtonText: "confirm",
       preConfirm: () => {
         const salary = document.getElementById("salary").value;
         const month = document.getElementById("month").value;
@@ -121,6 +125,9 @@ const EmployeeList = () => {
     if (formValues) {
       formValues.salary = parseInt(formValues.salary);
       formValues.year = parseInt(formValues.year);
+      if(!formValues.salary || !formValues.month || !formValues.year){
+        return Swal.fire("Warning!", "You have to fill up the form!", 'warning')
+      }
       try {
         const res = await axiosSecure.post(
           `/users/employee/pay-salary`,

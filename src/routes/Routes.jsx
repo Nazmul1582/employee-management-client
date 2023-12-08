@@ -48,9 +48,9 @@ const router = createBrowserRouter([
                 element: <EmployeeList />
             },
             {
-                path: "employee/:id",
+                path: "employee/:email",
                 element: <Details />,
-                loader: ({params}) => axiosPublic.get(`/users/${params.id}`)
+                loader: ({params}) => axiosPublic.get(`/users/${params.email}`)
             },
             {
                 path: "progress",

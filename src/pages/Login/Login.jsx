@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import axiosPublic from "../../utils/AxiosPublic";
 
 export default function Login() {
   const { login } = useAuth();
@@ -19,26 +20,34 @@ export default function Login() {
     formState: { errors },
     reset,
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     const { email, password } = data;
-    login(email, password)
-      .then(() => {
-          reset();
-          Swal.fire({
-            title: "User successfully logged-in!",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/");
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: error.message,
-        });
+    const user = await axiosPublic.get(`/users/${email}`);
+    if(password === user.data?.password && user.data?.isFired){
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You're fired! So, you can't login.",
       });
+    }
+    login(email, password)
+    .then(() => {
+        reset();
+        Swal.fire({
+          title: "User successfully logged-in!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
+    });
   };
 
   return (
