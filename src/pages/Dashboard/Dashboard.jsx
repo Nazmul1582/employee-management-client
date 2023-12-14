@@ -188,7 +188,7 @@ export default function Dashboard() {
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           {
-            (location.pathname === "/dashboard" && currentUser?.userRole === "admin") ? <AdminDashboard /> : <Outlet />
+            (location.pathname === "/dashboard" && currentUser?.userRole === "admin") ? <AdminDashboard user={currentUser} /> : <Outlet />
           }
         </Container>
       </Box>
