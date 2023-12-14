@@ -20,8 +20,9 @@ import {
 } from "./listItems";
 import { Avatar, Button, Tooltip } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import useUser from "../../hooks/useUser";
+import AdminDashboard from "./AdminDashboard/AdminDashboard";
 
 const drawerWidth = 240;
 
@@ -71,6 +72,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
+  const location = useLocation();
   const { user, logout } = useAuth();
   const [users] = useUser();
   const currentUser = users.find((ele) => ele.email === user?.email);
@@ -185,7 +187,9 @@ export default function Dashboard() {
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Outlet />
+          {
+            (location.pathname === "/dashboard" && currentUser?.userRole === "admin") ? <AdminDashboard /> : <Outlet />
+          }
         </Container>
       </Box>
     </Box>

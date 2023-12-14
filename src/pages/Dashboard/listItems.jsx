@@ -3,6 +3,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import PaymentIcon from "@mui/icons-material/Payment";
@@ -54,6 +55,14 @@ export const listItemsForEmployee = (
 
 export const listItemsForAdmin = (
   <React.Fragment>
+    <NavLink to="/dashboard" style={{textDecoration: "none", color:"black"}}>
+    <ListItemButton>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <ListItemText primary="Dashboard" />
+    </ListItemButton>
+    </NavLink>
     <NavLink to="/dashboard/all-employee-list" style={{textDecoration: "none", color:"black"}}>
     <ListItemButton>
       <ListItemIcon>
