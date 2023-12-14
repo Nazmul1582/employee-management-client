@@ -6,7 +6,7 @@ import useUser from "../../../hooks/useUser";
 const AdminDashboard = ({ user }) => {
   const formatedDate = moment().format("ddd, DD MMM YYYY");
   const [users] = useUser();
-  console.log(users);
+
   const totalHR = users.filter(
     (user) => user.userRole === "hr" && user.isVerified && !user.isFired
   );
@@ -27,14 +27,14 @@ const AdminDashboard = ({ user }) => {
   return (
     <Box>
       <Paper sx={{ p: 3 }}>
-        <Grid container alignItems="center" justifyContent="space-between">
+        <Grid container alignItems="center" justifyContent="space-between" spacing={5}>
           <Grid item>
             <Grid
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                gap: 2,
+                gap: 1,
               }}
             >
               <Avatar
@@ -54,12 +54,12 @@ const AdminDashboard = ({ user }) => {
         container
         justifyContent="space-between"
         alignItems="center"
-        gap={2}
+        spacing={5}
         my={3}
       >
-        <Grid item flex={1}>
-          <Paper>
-            <Typography variant="h6" fontWeight={600} textAlign="center" py={2}>
+        <Grid item sm={12} md={6}>
+          <Paper sx={{p: 5, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+            <Typography variant="h6" fontWeight={600} pb={2}>
               Employees History
             </Typography>
             <PieChart
@@ -68,8 +68,8 @@ const AdminDashboard = ({ user }) => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
-              height={370}
-              width={370}
+              height={350}
+              width={350}
             >
               <Pie
                 data={data}
@@ -91,7 +91,7 @@ const AdminDashboard = ({ user }) => {
             </PieChart>
           </Paper>
         </Grid>
-        <Grid item flex={1}>
+        <Grid item sm={12} md={6}>
           <Paper>
             <Typography variant="h6" fontWeight={600} textAlign="center" py={2}>
               Total Salary
