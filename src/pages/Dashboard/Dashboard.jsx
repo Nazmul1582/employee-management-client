@@ -18,7 +18,7 @@ import {
   listItemsForHR,
   listItemsForEmployee,
 } from "./listItems";
-import { Avatar, Button, Tooltip } from "@mui/material";
+import { Avatar, Button, Tooltip, useMediaQuery, useTheme } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import useUser from "../../hooks/useUser";
@@ -71,7 +71,9 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function Dashboard() {
-  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const isMediumLayoutAndUp = useMediaQuery(theme.breakpoints.up('md'));
+  const [open, setOpen] = React.useState(isMediumLayoutAndUp);
   const location = useLocation();
   const { user, logout } = useAuth();
   const [users] = useUser();
@@ -88,6 +90,18 @@ export default function Dashboard() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setOpen(isMediumLayoutAndUp);
+    };
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMediumLayoutAndUp]);
 
   return (
     <Box sx={{ display: "flex" }}>
