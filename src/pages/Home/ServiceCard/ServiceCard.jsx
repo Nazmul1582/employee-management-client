@@ -9,7 +9,9 @@ export default function ServiceCard({service}) {
   return (
     <Card elevation={5}>
       <CardMedia
-        sx={{ height: 200 }}
+        component="img"
+        height="200"
+        sx={{width: "fit-content", mx:"auto", py: "20px"}}
         image={service.image}
         title="service image"
       />
