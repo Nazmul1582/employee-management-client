@@ -5,11 +5,15 @@ import {
   Pie,
   Cell,
   Tooltip,
+  Area,
+  AreaChart,
   ResponsiveContainer,
+  XAxis,
+  YAxis,
+  CartesianGrid,
 } from "recharts";
 import useUser from "../../../hooks/useUser";
 import useSalary from "../../../hooks/useSalary";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
 
 const AdminDashboard = ({ user }) => {
   const formatedDate = moment().format("ddd, DD MMM YYYY");
@@ -145,34 +149,24 @@ const AdminDashboard = ({ user }) => {
             </Typography>
             <Box sx={{ p: 3, height: 400, minWidth: 500 }}>
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart
+                <AreaChart
                   data={chartData}
-                  margin={{
-                    top: 20,
-                    right: 30,
-                    left: 20,
-                    bottom: 20,
-                  }}
-                  barSize={20}
                 >
+                  <CartesianGrid strokeDasharray="3 3" />
                   <XAxis
                     dataKey={({ month, year }) =>
                       `${month.slice(0, 3)}-${year.toString().slice(-2)}`
                     }
-                    scale="point"
-                    padding={{ left: 10, right: 10 }}
                   />
                   <YAxis />
                   <Tooltip />
-                  <Legend />
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <Bar
+                  <Area
+                    type="monotone"
                     dataKey="totalSalary"
-                    fill="#8884d8"
-                    background={{ fill: "#eee" }}
-                    maxBarSize={80}
+                    stroke="#8884d8"
+                    fill="#F8EEFD"
                   />
-                </BarChart>
+                </AreaChart>
               </ResponsiveContainer>
             </Box>
           </Paper>
