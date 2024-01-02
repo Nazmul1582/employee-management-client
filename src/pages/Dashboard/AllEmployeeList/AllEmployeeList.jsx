@@ -132,7 +132,7 @@ const AllEmployeeList = () => {
                 Make HR
               </TableCell>
               <TableCell sx={{ fontWeight: "bold" }} align="center">
-                Fire
+                Status
               </TableCell>
             </TableRow>
           </TableHead>
@@ -167,7 +167,7 @@ const AllEmployeeList = () => {
                       onClick={() => handleFired(user._id)}
                       variant="contained"
                     >
-                      Fired
+                      Fire
                     </Button>
                   )}
                 </TableCell>
