@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
@@ -6,6 +6,7 @@ const Hero = () => {
     minHeight: 'calc(100vh - 69px)',
     height: "100%"
   }
+  const isSmallScreen = useMediaQuery('(min-width: 600px)')
   return (
     <Box
       component="section"
@@ -26,13 +27,13 @@ const Hero = () => {
           <Grid item xs={12} md={6}>
             <Typography
               component="h1"
-              variant="h2"
+              variant={isSmallScreen ? "h2" : "h4"}
               fontWeight="600"
               color="white"
             >
               Pulse of Talent Success
             </Typography>
-            <Typography color="white" sx={{ pb: "30px", pt: "10px" }}>
+            <Typography color="#e0e0e0" sx={{ pb: "30px", pt: "10px" }}>
               Empower your business with seamless employee management. Elevate
               productivity, streamline operations, and nurture success with
               Talent Pulse.

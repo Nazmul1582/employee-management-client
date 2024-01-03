@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -8,7 +7,7 @@ import Container from "@mui/material/Container";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axiosPublic from "../../utils/AxiosPublic";
 
 export default function Login() {
@@ -20,10 +19,10 @@ export default function Login() {
     formState: { errors },
     reset,
   } = useForm();
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     const { email, password } = data;
     const user = await axiosPublic.get(`/users/${email}`);
-    if(password === user.data?.password && user.data?.isFired){
+    if (password === user.data?.password && user.data?.isFired) {
       return Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -31,7 +30,7 @@ export default function Login() {
       });
     }
     login(email, password)
-    .then(() => {
+      .then(() => {
         reset();
         Swal.fire({
           title: "User successfully logged-in!",
@@ -40,21 +39,21 @@ export default function Login() {
           timer: 1500,
         });
         navigate("/");
-    })
-    .catch((error) => {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: error.message,
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
       });
-    });
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ mb: "50px" }}>
+    <Container component="main" maxWidth="xs" sx={{ minHeight: "calc(100vh - 69px)", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
       <Box
         sx={{
-          marginTop: 8,
+          py: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -101,14 +100,17 @@ export default function Login() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, py: 2 }}
           >
             Login
           </Button>
           <Grid textAlign="center">
-            <Link href="/signup" variant="body2">
-              {"Don't have an account? Sign Up"}
-            </Link>
+            <Typography variant="body2">
+              Don&apos;t have an account?{" "}
+              <NavLink to="/signup" style={{color:"#4540df"}}>
+                Sign Up
+              </NavLink>
+            </Typography>
           </Grid>
         </Box>
       </Box>

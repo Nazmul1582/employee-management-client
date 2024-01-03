@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -10,7 +9,7 @@ import { Controller, useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import axiosPublic from "../../utils/AxiosPublic";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -208,14 +207,17 @@ export default function SignUp() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, py: 2 }}
           >
             Sign Up
           </Button>
           <Grid textAlign="center">
-            <Link href="/login" variant="body2">
-              {"Already have an account? Login"}
-            </Link>
+            <Typography variant="body2">
+              Already have an account?{" "}
+              <NavLink to="/login" style={{color:"#4540df"}}>
+                Login
+              </NavLink>
+            </Typography>
           </Grid>
         </Box>
       </Box>
