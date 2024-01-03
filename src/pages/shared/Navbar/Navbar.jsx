@@ -54,7 +54,7 @@ const Navbar = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="black"
             >
               <MenuIcon />
             </IconButton>
@@ -77,8 +77,8 @@ const Navbar = () => {
               }}
             >
               <Link style={{ textDecoration: "none", color: "black" }} to="/">
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Home</Typography>
+                <MenuItem onClick={handleCloseNavMenu} sx={{"&:hover": {color: "#4540df"}}}>
+                  <Typography textAlign="center" px={5}>Home</Typography>
                 </MenuItem>
               </Link>
               {user && (
@@ -86,8 +86,8 @@ const Navbar = () => {
                   style={{ textDecoration: "none", color: "black" }}
                   to="/dashboard"
                 >
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">Dashboard</Typography>
+                  <MenuItem onClick={handleCloseNavMenu} sx={{"&:hover": {color: "#4540df"}}}>
+                    <Typography textAlign="center" px={5}>Dashboard</Typography>
                   </MenuItem>
                 </Link>
               )}
@@ -95,8 +95,8 @@ const Navbar = () => {
                 style={{ textDecoration: "none", color: "black" }}
                 to="/contact"
               >
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Contact</Typography>
+                <MenuItem onClick={handleCloseNavMenu} sx={{"&:hover": {color: "#4540df"}}}>
+                  <Typography textAlign="center" px={5}>Contact</Typography>
                 </MenuItem>
               </Link>
             </Menu>
@@ -124,19 +124,19 @@ const Navbar = () => {
             }}
           >
             <Link style={{ textDecoration: "none" }} to="/">
-              <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {background: "transparent", color: "#4540df"} }}>
+              <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {color: "#4540df"} }}>
                 Home
               </Button>
             </Link>
             {user && (
               <Link style={{ textDecoration: "none" }} to={`/dashboard`}>
-                <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {background: "transparent", color: "#4540df"} }}>
+                <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {color: "#4540df"} }}>
                   Dashboard
                 </Button>
               </Link>
             )}
             <Link style={{ textDecoration: "none" }} to="/contact">
-              <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {background: "transparent", color: "#4540df"} }}>
+              <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {color: "#4540df"} }}>
                 Contact
               </Button>
             </Link>
