@@ -17,8 +17,13 @@ const Contact = () => {
     country: "United States",
   };
 
+  const contactHeight = {
+    minHeight: "calc(100vh - 69px)",
+    height: "100%"
+  }
+
   return (
-    <Container maxWidth="xl" sx={{ py: "80px" }}>
+    <Container maxWidth="xl" style={contactHeight} sx={{display: "flex", justifyContent:"center", alignItems:"center", py: 10 }}>
       <Grid container spacing={5}>
         <Grid item xs={12} md={6} lg={4}>
           <Paper

@@ -78,7 +78,7 @@ const Navbar = () => {
               <Link style={{ textDecoration: "none", color: "black" }} to="/">
                 <MenuItem
                   onClick={handleCloseNavMenu}
-                  sx={{ "&:hover": { color: "#4540df" } }}
+                  sx={{ "&:hover": { color: "primary.main" } }}
                 >
                   <Typography textAlign="center" px={5}>
                     Home
@@ -92,7 +92,7 @@ const Navbar = () => {
                 >
                   <MenuItem
                     onClick={handleCloseNavMenu}
-                    sx={{ "&:hover": { color: "#4540df" } }}
+                    sx={{ "&:hover": { color: "primary.main" } }}
                   >
                     <Typography textAlign="center" px={5}>
                       Dashboard
@@ -106,7 +106,7 @@ const Navbar = () => {
               >
                 <MenuItem
                   onClick={handleCloseNavMenu}
-                  sx={{ "&:hover": { color: "#4540df" } }}
+                  sx={{ "&:hover": { color: "primary.main" } }}
                 >
                   <Typography textAlign="center" px={5}>
                     Contact
@@ -143,7 +143,7 @@ const Navbar = () => {
                   my: 2,
                   color: "black",
                   fontWeight: 600,
-                  "&:hover": { color: "#4540df" },
+                  "&:hover": { color: "primary.main" },
                 }}
               >
                 Home
@@ -156,7 +156,7 @@ const Navbar = () => {
                     my: 2,
                     color: "black",
                     fontWeight: 600,
-                    "&:hover": { color: "#4540df" },
+                    "&:hover": { color: "primary.main" },
                   }}
                 >
                   Dashboard
@@ -169,7 +169,7 @@ const Navbar = () => {
                   my: 2,
                   color: "black",
                   fontWeight: 600,
-                  "&:hover": { color: "#4540df" },
+                  "&:hover": { color: "primary.main" },
                 }}
               >
                 Contact
