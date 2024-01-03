@@ -27,19 +27,19 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar sx={{background: "white"}} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link style={{ textDecoration: "none" }} to="/">
             <Typography
               variant="h5"
               noWrap
+              color="primary"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "sans-serif",
                 fontWeight: 700,
-                color: "white",
                 textDecoration: "none",
               }}
             >
@@ -105,12 +105,12 @@ const Navbar = () => {
             <Typography
               variant="h5"
               noWrap
+              color="primary"
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
                 fontFamily: "sans-serif",
                 fontWeight: 700,
-                color: "white",
                 textDecoration: "none",
               }}
               >
@@ -124,19 +124,19 @@ const Navbar = () => {
             }}
           >
             <Link style={{ textDecoration: "none" }} to="/">
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
+              <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {background: "transparent", color: "#4540df"} }}>
                 Home
               </Button>
             </Link>
             {user && (
               <Link style={{ textDecoration: "none" }} to={`/dashboard`}>
-                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {background: "transparent", color: "#4540df"} }}>
                   Dashboard
                 </Button>
               </Link>
             )}
             <Link style={{ textDecoration: "none" }} to="/contact">
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
+              <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {background: "transparent", color: "#4540df"} }}>
                 Contact
               </Button>
             </Link>
@@ -153,7 +153,7 @@ const Navbar = () => {
                 <Button
                   onClick={logout}
                   variant="contained"
-                  sx={{ ml: "10px", backgroundColor: "white", color: "black" }}
+                  sx={{ ml: "10px"}}
                 >
                   Logout
                 </Button>
@@ -162,7 +162,7 @@ const Navbar = () => {
               <Link to="/login">
                 <Button
                   variant="contained"
-                  sx={{ ml: "10px", backgroundColor: "white", color: "black" }}
+                  sx={{ ml: "10px"}}
                 >
                   Login
                 </Button>
