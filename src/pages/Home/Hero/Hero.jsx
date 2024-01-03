@@ -1,4 +1,5 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -17,7 +18,9 @@ const Hero = () => {
                 Pulse of Talent Success
                 </Typography>
                 <Typography color="white" sx={{pb: "30px", pt:"10px"}}>Empower your business with seamless employee management. Elevate productivity, streamline operations, and nurture success with Talent Pulse.</Typography>
-                <Button variant="contained">Read More</Button>
+                <Link to="/dashboard">
+                  <Button size="large" variant="contained">Explore More</Button>
+                </Link>                
             </Grid>
         </Grid>
       </Container>

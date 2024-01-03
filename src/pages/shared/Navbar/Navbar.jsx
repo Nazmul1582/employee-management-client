@@ -9,7 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
@@ -27,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar sx={{background: "white"}} position="static">
+    <AppBar sx={{ background: "white" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link style={{ textDecoration: "none" }} to="/">
@@ -77,8 +76,13 @@ const Navbar = () => {
               }}
             >
               <Link style={{ textDecoration: "none", color: "black" }} to="/">
-                <MenuItem onClick={handleCloseNavMenu} sx={{"&:hover": {color: "#4540df"}}}>
-                  <Typography textAlign="center" px={5}>Home</Typography>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ "&:hover": { color: "#4540df" } }}
+                >
+                  <Typography textAlign="center" px={5}>
+                    Home
+                  </Typography>
                 </MenuItem>
               </Link>
               {user && (
@@ -86,8 +90,13 @@ const Navbar = () => {
                   style={{ textDecoration: "none", color: "black" }}
                   to="/dashboard"
                 >
-                  <MenuItem onClick={handleCloseNavMenu} sx={{"&:hover": {color: "#4540df"}}}>
-                    <Typography textAlign="center" px={5}>Dashboard</Typography>
+                  <MenuItem
+                    onClick={handleCloseNavMenu}
+                    sx={{ "&:hover": { color: "#4540df" } }}
+                  >
+                    <Typography textAlign="center" px={5}>
+                      Dashboard
+                    </Typography>
                   </MenuItem>
                 </Link>
               )}
@@ -95,8 +104,13 @@ const Navbar = () => {
                 style={{ textDecoration: "none", color: "black" }}
                 to="/contact"
               >
-                <MenuItem onClick={handleCloseNavMenu} sx={{"&:hover": {color: "#4540df"}}}>
-                  <Typography textAlign="center" px={5}>Contact</Typography>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ "&:hover": { color: "#4540df" } }}
+                >
+                  <Typography textAlign="center" px={5}>
+                    Contact
+                  </Typography>
                 </MenuItem>
               </Link>
             </Menu>
@@ -113,7 +127,7 @@ const Navbar = () => {
                 fontWeight: 700,
                 textDecoration: "none",
               }}
-              >
+            >
               TalentPulse
             </Typography>
           </Link>
@@ -124,19 +138,40 @@ const Navbar = () => {
             }}
           >
             <Link style={{ textDecoration: "none" }} to="/">
-              <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {color: "#4540df"} }}>
+              <Button
+                sx={{
+                  my: 2,
+                  color: "black",
+                  fontWeight: 600,
+                  "&:hover": { color: "#4540df" },
+                }}
+              >
                 Home
               </Button>
             </Link>
             {user && (
               <Link style={{ textDecoration: "none" }} to={`/dashboard`}>
-                <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {color: "#4540df"} }}>
+                <Button
+                  sx={{
+                    my: 2,
+                    color: "black",
+                    fontWeight: 600,
+                    "&:hover": { color: "#4540df" },
+                  }}
+                >
                   Dashboard
                 </Button>
               </Link>
             )}
             <Link style={{ textDecoration: "none" }} to="/contact">
-              <Button sx={{ my: 2, color: "black", fontWeight:600, "&:hover": {color: "#4540df"} }}>
+              <Button
+                sx={{
+                  my: 2,
+                  color: "black",
+                  fontWeight: 600,
+                  "&:hover": { color: "#4540df" },
+                }}
+              >
                 Contact
               </Button>
             </Link>
@@ -145,25 +180,20 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             {user ? (
               <>
-                <Tooltip title="Open settings">
-                  <IconButton sx={{ p: 0 }}>
-                    <Avatar alt="user profile photo" src={user.photoURL} />
-                  </IconButton>
-                </Tooltip>
+                <IconButton sx={{ p: 0 }}>
+                  <Avatar alt="user profile photo" src={user.photoURL} />
+                </IconButton>
                 <Button
                   onClick={logout}
                   variant="contained"
-                  sx={{ ml: "10px"}}
+                  sx={{ ml: "10px" }}
                 >
                   Logout
                 </Button>
               </>
             ) : (
               <Link to="/login">
-                <Button
-                  variant="contained"
-                  sx={{ ml: "10px"}}
-                >
+                <Button variant="contained" sx={{ ml: "10px" }}>
                   Login
                 </Button>
               </Link>
