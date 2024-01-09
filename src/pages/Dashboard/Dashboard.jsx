@@ -23,6 +23,8 @@ import useAuth from "../../hooks/useAuth";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import useUser from "../../hooks/useUser";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
+import EmployeeList from './EmployeeList/EmployeeList'
+import PaymentHistory from './PaymentHistory/PaymentHistory'
 
 const drawerWidth = 240;
 
@@ -102,6 +104,11 @@ export default function Dashboard() {
       window.removeEventListener('resize', handleResize);
     };
   }, [isMediumLayoutAndUp]);
+
+  // show the content of dashboard conditionally
+  const dashboardForAdmin = location.pathname === "/dashboard" && currentUser?.userRole === "admin";
+  const dashboardForHR = location.pathname === "/dashboard" && currentUser?.userRole === "hr";
+  const dashboardForEmployee = location.pathname === "/dashboard" && currentUser?.userRole === "employee"
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -202,7 +209,7 @@ export default function Dashboard() {
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           {
-            (location.pathname === "/dashboard" && currentUser?.userRole === "admin") ? <AdminDashboard user={currentUser} /> : <Outlet />
+            dashboardForAdmin ? <AdminDashboard user={currentUser} /> : dashboardForHR ? <EmployeeList /> : dashboardForEmployee ? <PaymentHistory /> : <Outlet />
           }
         </Container>
       </Box>

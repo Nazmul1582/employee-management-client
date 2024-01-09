@@ -72,7 +72,7 @@ export default function PaymentHistory() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {visibleRows.map((salary) => (
+            {visibleRows.length < 1 ? <StyledTableCell colSpan={3}><Typography variant="h5" textAlign="center" fontWeight={600} my={5}>No salary available</Typography></StyledTableCell> : visibleRows.map((salary) => (
               <StyledTableRow key={salary._id}>
                 <StyledTableCell align="center" component="th" scope="salary">
                   {salary.month}

@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import useUser from "../../../hooks/useUser";
@@ -70,7 +70,7 @@ const EmployeeList = () => {
           const isVerifiedUser = { isVerified: true };
           const res = await axiosSecure.patch(`/users/${id}`, isVerifiedUser);
           if (res.data.modifiedCount > 0) {
-            refetch()
+            refetch();
             Swal.fire({
               title: "Verified!",
               text: "Your user has been verified.",
@@ -125,8 +125,12 @@ const EmployeeList = () => {
     if (formValues) {
       formValues.salary = parseInt(formValues.salary);
       formValues.year = parseInt(formValues.year);
-      if(!formValues.salary || !formValues.month || !formValues.year){
-        return Swal.fire("Warning!", "You have to fill up the form!", 'warning')
+      if (!formValues.salary || !formValues.month || !formValues.year) {
+        return Swal.fire(
+          "Warning!",
+          "You have to fill up the form!",
+          "warning"
+        );
       }
       try {
         const res = await axiosSecure.post(
@@ -160,19 +164,30 @@ const EmployeeList = () => {
       };
     });
   return (
-    <div style={{ height: 400, width: "100%" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-        pageSizeOptions={[5, 10]}
-        checkboxSelection
-      />
-    </div>
+    <>
+      <Typography
+        textAlign="center"
+        component="h2"
+        variant="h4"
+        fontWeight={600}
+        mb={4}
+      >
+        Employee List
+      </Typography>
+      <div style={{ height: 400, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 },
+            },
+          }}
+          pageSizeOptions={[5, 10]}
+          checkboxSelection
+        />
+      </div>
+    </>
   );
 };
 
