@@ -49,7 +49,7 @@ const Services = () => {
   ];
 
   return (
-    <Box component="section" sx={{ py: "5rem" }}>
+    <Box component="section" pt={10}>
       <Container maxWidth="xl">
         <SectionTitle heading="Our Services" subHeading="Transforming Workforce Management for Success" />
         <Grid container justifyContent="center" alignItems="center" spacing={4}>
