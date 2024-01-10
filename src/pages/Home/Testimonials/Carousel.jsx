@@ -87,7 +87,7 @@ function Carousel() {
           sx={{
             display: "flex",
             alignItems: "center",
-            height: 50,
+            mt: 6,
             pl: 2,
             bgcolor: "background.default",
           }}
@@ -140,6 +140,7 @@ function Carousel() {
           steps={maxSteps}
           position="static"
           activeStep={activeStep}
+          sx={{background: "transparent"}}
           nextButton={
             <Button
               size="small"

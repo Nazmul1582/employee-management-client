@@ -4,7 +4,7 @@ import Carousel from "./Carousel";
 
 const Testimonials = () => {
   return (
-    <Box component="section" pt={10}>
+    <Box component="section" py={10}>
       <Container maxWidth="xl">
         <Grid item xs={12}>
           <SectionTitle

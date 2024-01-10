@@ -86,10 +86,9 @@ export default function SignUp() {
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ mb: "50px" }}>
+    <Container component="main" maxWidth="xs" sx={{ py: 10 }}>
       <Box
         sx={{
-          marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
