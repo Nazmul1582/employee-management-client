@@ -1,4 +1,4 @@
-import { Box, Container, Typography, useTheme } from "@mui/material";
+import { Box, Button, Container, TextField, Typography, useTheme } from "@mui/material";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 
 const NewsLetter = () => {
@@ -49,6 +49,10 @@ const NewsLetter = () => {
           <Typography variant="body1">
             Stay updated with our latest news, events, and exclusive offers.
           </Typography>
+        </Box>
+        <Box component="form" sx={{display: "flex", alignItems: "center", gap: 3, my: 5}}>
+            <TextField  type="email" placeholder="Enter you email" variant="outlined" InputProps={{style: {background: "white"}}} />
+            <Button variant="contained" sx={{bgcolor: "white", color: "primary.main", px: 3, py: "14px", "&:hover": {backgroundColor: "secondary.main"}}}>Subscribe</Button>
         </Box>
       </Container>
     </Box>
