@@ -3,6 +3,7 @@ import {
   CardMedia,
   Container,
   Grid,
+  LinearProgress,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -15,14 +16,25 @@ const About = () => {
         maxWidth="xl"
         sx={{ minHeight: "calc(100vh - 69px)", height: "100%", pt: 5, pb: 10 }}
       >
-        <Box textAlign="center" py={10} mb={5} bgcolor="primary.main" color="white" borderRadius={1}>
-            <Typography variant="h2" gutterBottom>Welcome to Talent Pulse</Typography>
-            <Typography variant="body1" gutterBottom>Revolutionizing Workforce Management for a Brighter Future</Typography>
+        <Box
+          textAlign="center"
+          py={10}
+          mb={5}
+          bgcolor="primary.main"
+          color="white"
+          borderRadius={1}
+        >
+          <Typography variant="h2" gutterBottom>
+            Welcome to Talent Pulse
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Revolutionizing Workforce Management for a Brighter Future
+          </Typography>
         </Box>
         <Typography
           variant={`${isMediumLayoutAndUp ? "h2" : "h4"}`}
           fontWeight={600}
-          >
+        >
           Our Mission:
         </Typography>
         <Typography
@@ -37,6 +49,21 @@ const About = () => {
         <Grid container pt={3} spacing={3}>
           <Grid item sm={12} lg={4}>
             <Box textAlign="justify">
+              <Box mb={2}>
+                <Typography variant="body1" py={1}>
+                  Client Satisfaction
+                </Typography>
+                <LinearProgress variant="determinate" value={100} />
+                <Typography variant="body1" py={1}>
+                  Precise Calculation
+                </Typography>
+                <LinearProgress variant="determinate" value={97} />
+                <Typography variant="body1" py={1}>
+                  Projects Success
+                </Typography>
+                <LinearProgress variant="determinate" value={95} />
+              </Box>
+
               <Typography variant="body2" mb={2}>
                 At Talent Pulse, our mission is to revolutionize the way
                 organizations manage their workforce. We are committed to
@@ -73,7 +100,9 @@ const About = () => {
           </Grid>
           <Grid item sm={12} lg={4}>
             <Box textAlign="justify">
-              <Typography fontWeight={600} fontSize={16} gutterBottom>Our Employee Management System For HR Professionals:</Typography>
+              <Typography fontWeight={600} fontSize={16} gutterBottom>
+                Our Employee Management System For HR Professionals:
+              </Typography>
               <Typography variant="body2" mb={2}>
                 Effortlessly manage employee data, track performance, and
                 streamline recruitment processes with our comprehensive HR
@@ -97,7 +126,9 @@ const About = () => {
           </Grid>
           <Grid item sm={12} lg={4}>
             <Box textAlign="justify">
-              <Typography fontWeight={600} fontSize={16} gutterBottom>Security and Compliance</Typography>
+              <Typography fontWeight={600} fontSize={16} gutterBottom>
+                Security and Compliance
+              </Typography>
               <Typography variant="body2" mb={2}>
                 At Talent Pulse, we prioritize the security of your data. Our
                 Employee Management System is built with robust security
@@ -116,7 +147,12 @@ const About = () => {
                 employee management. Together, let&apos;s shape the future of
                 work.
               </Typography>
-              <CardMedia component="img" image="https://i.ibb.co/1ns2wGx/discussing-office.jpg" title="about image" sx={{maxHeight: 250, borderRadius: 3}} />
+              <CardMedia
+                component="img"
+                image="https://i.ibb.co/1ns2wGx/discussing-office.jpg"
+                title="about image"
+                sx={{ maxHeight: 250, borderRadius: 3 }}
+              />
             </Box>
           </Grid>
         </Grid>
