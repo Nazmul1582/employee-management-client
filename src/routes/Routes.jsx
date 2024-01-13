@@ -14,6 +14,7 @@ import axiosPublic from "../utils/AxiosPublic";
 import PrivateRoute from "./PrivateRoute";
 import NotFound from "../pages/NotFound/NotFound";
 import Contact from "../pages/Contact/Contact";
+import About from "../pages/About/About";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />
+            },
+            {
+                path: "/about",
+                element: <About />
             },
             {
                 path: "signup",

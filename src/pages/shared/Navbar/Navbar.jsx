@@ -85,6 +85,16 @@ const Navbar = () => {
                   </Typography>
                 </MenuItem>
               </Link>
+              <Link style={{ textDecoration: "none", color: "black" }} to="/about">
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ "&:hover": { color: "primary.main" } }}
+                >
+                  <Typography textAlign="center" px={5}>
+                    About
+                  </Typography>
+                </MenuItem>
+              </Link>
               {user && (
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
@@ -147,6 +157,18 @@ const Navbar = () => {
                 }}
               >
                 Home
+              </Button>
+            </Link>
+            <Link style={{ textDecoration: "none" }} to="/about">
+              <Button
+                sx={{
+                  my: 2,
+                  color: "black",
+                  fontWeight: 600,
+                  "&:hover": { color: "primary.main" },
+                }}
+              >
+                About
               </Button>
             </Link>
             {user && (
