@@ -1,4 +1,5 @@
 import { Box, Container, Typography, useTheme } from "@mui/material";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 
 const NewsLetter = () => {
   const theme = useTheme();
@@ -24,6 +25,23 @@ const NewsLetter = () => {
           alignItems: "center",
         }}
       >
+        <Box
+          sx={{
+            display: "grid",
+            placeItems: "center",
+            background: theme.palette.secondary.main,
+            width: 100,
+            height: 100,
+            borderRadius: "50%",
+            padding: 2,
+            boxShadow: theme.shadows[4],
+            marginBottom: 5,
+          }}
+        >
+          <MailOutlineOutlinedIcon
+            sx={{ fontSize: "3rem", color: theme.palette.primary.main }}
+          />
+        </Box>
         <Box color="white" textAlign="center">
           <Typography variant="h3" gutterBottom>
             Subscribe to Our Newsletter
