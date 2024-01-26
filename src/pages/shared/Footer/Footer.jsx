@@ -28,58 +28,157 @@ const Footer = () => {
             </Grid>
 
             <Grid item xs={12} sm={12} md={6} lg={3}>
-              <Box sx={{display: "flex", flexDirection: "column", gap: 1}}>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 <Typography variant="h6" mb={1} fontWeight={500}>
                   Services
                 </Typography>
-                <NavLink  style={{textDecoration: "none"}} to="">
-                  <Typography sx={{ color: "gray", transition: "0.1s", width: "fit-content", "&:hover": {color: 'primary.main'}}}>Branding </Typography>
+                <NavLink style={{ textDecoration: "none" }} to="">
+                  <Typography
+                    sx={{
+                      color: "gray",
+                      transition: "0.1s",
+                      width: "fit-content",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    Branding
+                  </Typography>
                 </NavLink>
-                <NavLink  style={{textDecoration: "none"}} to="">
-                  <Typography sx={{ color: "gray", transition: "0.1s", width: "fit-content", "&:hover": {color: 'primary.main'}}}>Design </Typography>
+                <NavLink style={{ textDecoration: "none" }} to="">
+                  <Typography
+                    sx={{
+                      color: "gray",
+                      transition: "0.1s",
+                      width: "fit-content",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    Design
+                  </Typography>
                 </NavLink>
-                <NavLink  style={{textDecoration: "none"}} to="">
-                  <Typography sx={{ color: "gray", transition: "0.1s", width: "fit-content", "&:hover": {color: 'primary.main'}}}>Marketing </Typography>
+                <NavLink style={{ textDecoration: "none" }} to="">
+                  <Typography
+                    sx={{
+                      color: "gray",
+                      transition: "0.1s",
+                      width: "fit-content",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    Marketing
+                  </Typography>
                 </NavLink>
-                <NavLink  style={{textDecoration: "none"}} to="">
-                  <Typography sx={{ color: "gray", transition: "0.1s", width: "fit-content", "&:hover": {color: 'primary.main'}}}>Advertisement </Typography>
+                <NavLink style={{ textDecoration: "none" }} to="">
+                  <Typography
+                    sx={{
+                      color: "gray",
+                      transition: "0.1s",
+                      width: "fit-content",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    Development
+                  </Typography>
                 </NavLink>
               </Box>
             </Grid>
 
             <Grid item xs={12} sm={12} md={6} lg={3}>
-              <Box sx={{display: "flex", flexDirection: "column", gap: 1}}>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 <Typography variant="h6" mb={1} fontWeight={500}>
                   Company
                 </Typography>
-                <NavLink  style={{textDecoration: "none"}} to="/">
-                  <Typography sx={{ color: "gray", transition: "0.1s", width: "fit-content", "&:hover": {color: 'primary.main'}}}>Home </Typography>
+                <NavLink style={{ textDecoration: "none" }} to="/">
+                  <Typography
+                    sx={{
+                      color: "gray",
+                      transition: "0.1s",
+                      width: "fit-content",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    Home
+                  </Typography>
                 </NavLink>
-                <NavLink  style={{textDecoration: "none"}} to="/about">
-                  <Typography sx={{ color: "gray", transition: "0.1s", width: "fit-content", "&:hover": {color: 'primary.main'}}}>About </Typography>
+                <NavLink style={{ textDecoration: "none" }} to="/about">
+                  <Typography
+                    sx={{
+                      color: "gray",
+                      transition: "0.1s",
+                      width: "fit-content",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    About
+                  </Typography>
                 </NavLink>
-                <NavLink  style={{textDecoration: "none"}} to="/dashboard">
-                  <Typography sx={{ color: "gray", transition: "0.1s", width: "fit-content", "&:hover": {color: 'primary.main'}}}>Dashboard </Typography>
+                <NavLink style={{ textDecoration: "none" }} to="/dashboard">
+                  <Typography
+                    sx={{
+                      color: "gray",
+                      transition: "0.1s",
+                      width: "fit-content",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    Dashboard
+                  </Typography>
                 </NavLink>
-                <NavLink  style={{textDecoration: "none"}} to="/contact">
-                  <Typography sx={{ color: "gray", transition: "0.1s", width: "fit-content", "&:hover": {color: 'primary.main'}}}>Contact </Typography>
+                <NavLink style={{ textDecoration: "none" }} to="/contact">
+                  <Typography
+                    sx={{
+                      color: "gray",
+                      transition: "0.1s",
+                      width: "fit-content",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    Contact
+                  </Typography>
                 </NavLink>
               </Box>
             </Grid>
 
             <Grid item xs={12} sm={12} md={6} lg={3}>
-              <Box sx={{display: "flex", flexDirection: "column", gap: 1}}>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 <Typography variant="h6" mb={1} fontWeight={500}>
                   Legal
                 </Typography>
-                <NavLink  style={{textDecoration: "none"}} to="">
-                  <Typography sx={{ color: "gray", transition: "0.1s", width: "fit-content", "&:hover": {color: 'primary.main'}}}>Terms of use </Typography>
+                <NavLink style={{ textDecoration: "none" }} to="">
+                  <Typography
+                    sx={{
+                      color: "gray",
+                      transition: "0.1s",
+                      width: "fit-content",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    Terms of use
+                  </Typography>
                 </NavLink>
-                <NavLink  style={{textDecoration: "none"}} to="">
-                  <Typography sx={{ color: "gray", transition: "0.1s", width: "fit-content", "&:hover": {color: 'primary.main'}}}>Privacy policy </Typography>
+                <NavLink style={{ textDecoration: "none" }} to="">
+                  <Typography
+                    sx={{
+                      color: "gray",
+                      transition: "0.1s",
+                      width: "fit-content",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    Privacy policy
+                  </Typography>
                 </NavLink>
-                <NavLink  style={{textDecoration: "none"}} to="">
-                  <Typography sx={{ color: "gray", transition: "0.1s", width: "fit-content", "&:hover": {color: 'primary.main'}}}>Cookie policy </Typography>
+                <NavLink style={{ textDecoration: "none" }} to="">
+                  <Typography
+                    sx={{
+                      color: "gray",
+                      transition: "0.1s",
+                      width: "fit-content",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    Cookie policy
+                  </Typography>
                 </NavLink>
               </Box>
             </Grid>
